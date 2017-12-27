@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jw.mapper.RoleMapper">
+	<sql id="query_list">
+		<where>
+		</where>
+	</sql>
+	<sql id="query_get">
+		<where>
+			<if test="roleId != null and roleId != ''">
+				and roleId = #{roleId}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getRolesByUserId" parameterType="java.lang.String" resultType="Role">
+		select * from t_role where roleId in 
+			(select roleId from t_user_role where userId = #{userId})
+	</select>
+	
+	<select id="list" parameterType="Role" resultType="Role">
+		select * from t_role
+		<include refid="query_list"></include>
+		<include refid="com.jw.mapper.UserMapper.sort"></include>
+		<include refid="com.jw.mapper.UserMapper.page"></include>
+	</select>
+	
+	<select id="get" parameterType="Role" resultType="Role">
+		select * from t_role
+		<include refid="query_get"></include>
+	</select>
+	
+	<select id="count" parameterType="Role" resultType="java.lang.Integer">
+		select count(*) from t_role
+		<include refid="query_list"></include>
+	</select>
+	
+	<insert id="insert" parameterType="Role">
+		insert into t_role (
+			roleId,
+			roleName,
+			roleDes,
+			roleStatus
+		)
+		values (
+			UUID(),
+			#{roleName},
+			#{roleDes},
+			#{roleStatus}
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="Role">
+		delete from t_role
+		<where>
+			<if test="roleId != null and roleId != ''">
+				and roleId = #{roleId}
+			</if>
+		</where>
+	</delete>
+
+	<update id="update" parameterType="Role">
+		update t_role set roleName = #{roleName}, 
+			roleDes = #{roleDes}, 
+			roleStatus = #{roleStatus}
+			where roleId = #{roleId}
+	</update>
+
+</mapper>

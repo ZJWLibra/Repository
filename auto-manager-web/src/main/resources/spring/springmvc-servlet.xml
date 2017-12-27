@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://code.alibabatech.com/schema/dubbo
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		
+	<!-- <context:property-placeholder location="classpath:config/conf.properties"/> -->
+		
+	<import resource="classpath:spring/applicationContext-shiro.xml"/>
+
+	<context:component-scan base-package="com.jw.controller" />
+	
+	<mvc:annotation-driven />
+	
+	<mvc:resources location="/css/" mapping="/css/**"/>
+	<mvc:resources location="/js/" mapping="/js/**"/>
+	<mvc:resources location="/img/" mapping="/img/**"/>
+	<mvc:resources location="/hplus/" mapping="/hplus/**"/>
+	
+	<!-- 开启aop代理 -->
+	<aop:config proxy-target-class="true"></aop:config>
+	
+	<!-- 开启Shiro注解 -->
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager"></property>
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- 全局异常处理器 -->
+	<bean class="com.jw.exception.CustomExceptionResolver"></bean>
+
+	<!-- 引用dubbo服务 -->
+	<dubbo:application name="auto-manager-web"/>
+	<dubbo:registry protocol="zookeeper" address="47.96.182.243:2181"/>	
+	<dubbo:reference interface="com.jw.service.UserService" id="userService" timeout="300000" />
+	<dubbo:reference interface="com.jw.service.RoleService" id="roleService" timeout="300000" />
+</beans>
