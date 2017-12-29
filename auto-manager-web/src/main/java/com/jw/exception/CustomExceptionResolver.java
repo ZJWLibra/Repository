@@ -19,6 +19,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
 			Exception e) {
 		ModelAndView mav = new ModelAndView();
 		
+		// 没有权限
 		if (e instanceof UnauthorizedException) {
 			mav.setViewName("error/403");
 		} else {

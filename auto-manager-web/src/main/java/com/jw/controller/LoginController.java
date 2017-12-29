@@ -14,9 +14,10 @@ import com.jw.model.ext.UserExt;
 
 @Controller
 public class LoginController {
-	
+
 	/**
 	 * 登录未成功处理方法
+	 * 
 	 * @param request
 	 * @return
 	 * @throws Exception
@@ -35,26 +36,28 @@ public class LoginController {
 			} else if ("randomCodeError".equals(exceptionClassName)) {
 				// throw new MyException("验证码错误 ");
 			} else {
-				throw new Exception();// 最终在异常处理器生成未知错误
+				// 最终在异常处理器生成未知错误
+				throw new Exception();
 			}
 		}
 
 		return "login";
 	}
-	
+
 	/**
 	 * 访问主页
+	 * 
 	 * @return
 	 */
 	@RequestMapping("/toIndex")
 	public String toIndex(Model model) {
 		Subject subject = SecurityUtils.getSubject();
-		
+
 		// 获取身份信息
 		UserExt userExt = (UserExt) subject.getPrincipal();
-		
+
 		model.addAttribute("user", userExt);
-		
+
 		return "index";
 	}
 }

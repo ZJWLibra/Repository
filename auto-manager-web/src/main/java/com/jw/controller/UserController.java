@@ -18,6 +18,7 @@ import com.jw.model.common.AutoResult;
 import com.jw.model.common.AutoTree;
 import com.jw.service.RoleService;
 import com.jw.service.UserService;
+import com.jw.shiro.realm.CustomRealm;
 import com.jw.util.DateUtil;
 import com.jw.util.MD5Util;
 
@@ -26,8 +27,12 @@ import com.jw.util.MD5Util;
 public class UserController {
 	@Resource
 	private UserService userService;
+	
 	@Resource
 	private RoleService roleService;
+	
+	@Resource
+	private CustomRealm customRealm;
 	
 	@RequestMapping("/toIndex")
 	@RequiresPermissions("user:list")
@@ -197,6 +202,8 @@ public class UserController {
 	@RequiresPermissions("user:role")
 	public @ResponseBody AutoResult insertRole(String[] ids, String userId) {
 		AutoResult autoResult = userService.insertRole(ids, userId);
+		
+		customRealm.clearCached();
 		
 		return autoResult;
 	}
