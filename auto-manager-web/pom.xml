@@ -78,6 +78,11 @@
 		    <groupId>org.apache.shiro</groupId>
 		    <artifactId>shiro-spring</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-ehcache</artifactId>
+		</dependency>
+		
 
 		<!-- dubbo相关 -->
 		<dependency>

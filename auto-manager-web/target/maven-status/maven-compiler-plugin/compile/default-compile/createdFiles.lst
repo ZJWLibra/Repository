@@ -1,5 +1,6 @@
 com\jw\controller\LoginController.class
 com\jw\exception\CustomExceptionResolver.class
+com\jw\shiro\filter\CustomFormAuthenticationFilter.class
 com\jw\controller\UserController.class
 com\jw\controller\RoleController.class
 com\jw\shiro\realm\CustomRealm.class

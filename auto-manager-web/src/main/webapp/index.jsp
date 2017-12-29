@@ -11,7 +11,7 @@ String path = request.getContextPath();
 </head>
 <body>
 	<%
-		response.sendRedirect("/toIndex");
+		response.sendRedirect("toIndex");
 	 %>
 </body>
 </html>

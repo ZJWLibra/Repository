@@ -1,0 +1,13 @@
+com\jw\base\BaseService.class
+com\jw\model\common\AutoResult.class
+com\jw\model\common\AutoTree.class
+com\jw\model\Permission.class
+com\jw\util\MD5Util.class
+com\jw\model\common\AutoModel.class
+com\jw\model\User.class
+com\jw\base\BaseMapper.class
+com\jw\model\RolePermission.class
+com\jw\util\DateUtil.class
+com\jw\model\UserRole.class
+com\jw\model\ext\UserExt.class
+com\jw\model\Role.class
