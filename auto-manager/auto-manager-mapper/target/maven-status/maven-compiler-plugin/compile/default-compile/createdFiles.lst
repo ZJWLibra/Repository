@@ -1,4 +1,5 @@
 com\jw\mapper\UserMapper.class
+com\jw\mapper\CarBrandMapper.class
 com\jw\mapper\PermissionMapper.class
 com\jw\mapper\RoleMapper.class
 com\jw\mapper\RolePermissionMapper.class

@@ -17,6 +17,7 @@ import com.jw.model.Role;
 import com.jw.model.RolePermission;
 import com.jw.model.common.AutoResult;
 import com.jw.model.common.AutoTree;
+import com.jw.model.common.JqgridResult;
 import com.jw.service.RoleService;
 
 @Service
@@ -75,31 +76,32 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public List<Role> list(Role t) {
+	public JqgridResult<Role> list(Role t) {
+		JqgridResult<Role> result = new JqgridResult<>();
+		
+		Long count;
+		List<Role> list;
+		
 		try {
-			return roleMapper.list(t);
+			count = roleMapper.count(t);
+			list = roleMapper.list(t);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 		
-		return null;
+		result.setPage(t.getPage());
+		result.setRecords(count);
+		result.setRows(list);
+		result.setTotal(result.getTotal(t.getRows()));
+		
+		return result;
 	}
 	
 	@Override
 	public Role get(Role t) {
 		try {
 			return roleMapper.get(t);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-
-	@Override
-	public Integer count(Role t) {
-		try {
-			return roleMapper.count(t);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

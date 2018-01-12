@@ -16,7 +16,7 @@
 		<slf4j.version>1.6.4</slf4j.version>
 		<jackson.version>2.9.3</jackson.version>
 		<druid.version>1.1.6</druid.version>
-		<httpclient.version>4.3.5</httpclient.version>
+		<httpclient.version>4.4.1</httpclient.version>
 		<jstl.version>1.2</jstl.version>
 		<servlet-api.version>4.0.0</servlet-api.version>
 		<jsp-api.version>2.2</jsp-api.version>
@@ -30,15 +30,14 @@
 		<zookeeper.version>3.4.7</zookeeper.version>
 		<zkclient.version>0.1</zkclient.version>
 		<activemq.version>5.11.2</activemq.version>
-		<freemarker.version>2.3.23</freemarker.version>
 		<quartz.version>2.2.2</quartz.version>
-		<fastdfs_client.version>1.25</fastdfs_client.version>
 		
 		<commons-beanutils.version>1.9.3</commons-beanutils.version>
 		<shiro-core.version>1.4.0</shiro-core.version>
 		<shiro-web.version>1.4.0</shiro-web.version>
 		<shiro-spring.version>1.4.0</shiro-spring.version>
 		<shiro-ehcache.version>1.4.0</shiro-ehcache.version>
+		<aliyun-sdk-oss.version>2.8.2</aliyun-sdk-oss.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -63,28 +62,24 @@
 			    <artifactId>commons-beanutils</artifactId>
 			    <version>${commons-beanutils.version}</version>
 			</dependency>
-			
 			<!-- Jackson Json处理工具包 -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
 				<version>${jackson.version}</version>
 			</dependency>
-			
 			<!-- httpclient -->
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
 				<version>${httpclient.version}</version>
 			</dependency>
-			
 			<!-- quartz任务调度框架 -->
 			<dependency>
 				<groupId>org.quartz-scheduler</groupId>
 				<artifactId>quartz</artifactId>
 				<version>${quartz.version}</version>
 			</dependency>
-			
 			<!-- 单元测试 -->
 			<dependency>
 				<groupId>junit</groupId>
@@ -92,14 +87,18 @@
 				<version>${junit.version}</version>
 				<scope>test</scope>
 			</dependency>
-			
 			<!-- 日志处理 -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
-			
+			<!-- 阿里云OSS存储 -->
+			<dependency>
+				<groupId>com.aliyun.oss</groupId>
+				<artifactId>aliyun-sdk-oss</artifactId>
+				<version>${aliyun-sdk-oss.version}</version>
+			</dependency>
 			<!-- Mybatis -->
 			<dependency>
 				<groupId>org.mybatis</groupId>
@@ -111,21 +110,18 @@
 				<artifactId>mybatis-spring</artifactId>
 				<version>${mybatis.spring.version}</version>
 			</dependency>
-			
 			<!-- MySql -->
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql.version}</version>
 			</dependency>
-			
 			<!-- 连接池 -->
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>druid</artifactId>
 				<version>${druid.version}</version>
 			</dependency>
-			
 			<!-- Spring -->
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -162,7 +158,6 @@
 				<artifactId>spring-context-support</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
-			
 			<!-- Shiro -->
 			<dependency>
 			    <groupId>org.apache.shiro</groupId>
@@ -184,7 +179,6 @@
 			    <artifactId>shiro-ehcache</artifactId>
 			    <version>${shiro-ehcache.version}</version>
 			</dependency>
-
 			<!-- JSP相关 -->
 			<dependency>
 				<groupId>jstl</groupId>
@@ -203,28 +197,24 @@
 				<version>${jsp-api.version}</version>
 				<scope>provided</scope>
 			</dependency>
-			
 			<!-- 文件上传组件 -->
 			<dependency>
 				<groupId>commons-fileupload</groupId>
 				<artifactId>commons-fileupload</artifactId>
 				<version>${commons-fileupload.version}</version>
 			</dependency>
-			
 			<!-- Redis客户端 -->
 			<dependency>
 				<groupId>redis.clients</groupId>
 				<artifactId>jedis</artifactId>
 				<version>${jedis.version}</version>
 			</dependency>
-			
 			<!-- solr客户端 -->
 			<dependency>
 				<groupId>org.apache.solr</groupId>
 				<artifactId>solr-solrj</artifactId>
 				<version>${solrj.version}</version>
 			</dependency>
-			
 			<!-- dubbo相关 -->
 			<dependency>
 				<groupId>com.alibaba</groupId>
@@ -245,16 +235,6 @@
 				<groupId>org.apache.activemq</groupId>
 				<artifactId>activemq-all</artifactId>
 				<version>${activemq.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.freemarker</groupId>
-				<artifactId>freemarker</artifactId>
-				<version>${freemarker.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>fastdfs_client</groupId>
-				<artifactId>fastdfs_client</artifactId>
-				<version>${fastdfs_client.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

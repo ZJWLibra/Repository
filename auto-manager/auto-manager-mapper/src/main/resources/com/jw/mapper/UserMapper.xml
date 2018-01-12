@@ -8,8 +8,8 @@
 		</if>
 	</sql>
 	<sql id="page">
-		<if test="startData != null and startData != '' and rows != null and rows != ''">
-			limit #{startData}, #{rows}
+		<if test="beginIndex != null and beginIndex != '' and rows != null and rows != ''">
+			limit #{beginIndex}, #{rows}
 		</if>
 	</sql>
 	<sql id="query_list">
@@ -48,7 +48,7 @@
 		<include refid="query_get"></include>
 	</select>
 	
-	<select id="count" parameterType="User" resultType="java.lang.Integer">
+	<select id="count" parameterType="User" resultType="java.lang.Long">
 		select count(*) from t_user
 		<include refid="query_list"></include>
 	</select>
@@ -86,15 +86,6 @@
 				#{wechatOpenId}, #{userIcon}, #{userDes}, #{companyId},
 				#{userSalary}, #{userCreatedTime}, #{userLoginedTime}, #{userStatus})
 	</insert>
-	
-	<delete id="delete" parameterType="User">
-		delete from t_user
-		<where>
-			<if test="userId != null and userId != ''">
-				and userId = #{userId}
-			</if>
-		</where>
-	</delete>
 
 	<update id="update" parameterType="User">
 		update t_user
@@ -120,4 +111,12 @@
 		userStatus = #{userStatus} where userId = #{userId}
 	</update>
 
+	<delete id="delete" parameterType="User">
+		delete from t_user
+		<where>
+			<if test="userId != null and userId != ''">
+				and userId = #{userId}
+			</if>
+		</where>
+	</delete>
 </mapper>

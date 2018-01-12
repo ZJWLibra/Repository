@@ -31,7 +31,7 @@
 		<include refid="query_get"></include>
 	</select>
 	
-	<select id="count" parameterType="Role" resultType="java.lang.Integer">
+	<select id="count" parameterType="Role" resultType="java.lang.Long">
 		select count(*) from t_role
 		<include refid="query_list"></include>
 	</select>
@@ -50,6 +50,13 @@
 			#{roleStatus}
 		)
 	</insert>
+
+	<update id="update" parameterType="Role">
+		update t_role set roleName = #{roleName}, 
+			roleDes = #{roleDes}, 
+			roleStatus = #{roleStatus}
+			where roleId = #{roleId}
+	</update>
 	
 	<delete id="delete" parameterType="Role">
 		delete from t_role
@@ -59,12 +66,4 @@
 			</if>
 		</where>
 	</delete>
-
-	<update id="update" parameterType="Role">
-		update t_role set roleName = #{roleName}, 
-			roleDes = #{roleDes}, 
-			roleStatus = #{roleStatus}
-			where roleId = #{roleId}
-	</update>
-
 </mapper>

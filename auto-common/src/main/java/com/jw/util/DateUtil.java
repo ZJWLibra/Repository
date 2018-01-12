@@ -18,11 +18,20 @@ public class DateUtil {
 	 * @return 转换后的时间
 	 * @throws ParseException 
 	 */
-	public static Date StringToDate(String strDate, String dateType) throws ParseException {
-		SimpleDateFormat formatter = new SimpleDateFormat(dateType);
+	public static Date stringToDate(String strDate, String format) {
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		
-		Date date = formatter.parse(strDate);
+		try {
+			return sdf.parse(strDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static String dateToString(Date date, String format) {
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		
-		return date;
+		return sdf.format(date);
 	}
 }

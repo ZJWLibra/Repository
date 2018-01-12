@@ -17,7 +17,7 @@
         http://code.alibabatech.com/schema/dubbo
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 		
-	<!-- <context:property-placeholder location="classpath:config/conf.properties"/> -->
+	<context:property-placeholder location="classpath:config/oss.properties"/>
 		
 	<import resource="classpath:spring/applicationContext-shiro.xml"/>
 
@@ -29,6 +29,7 @@
 	<mvc:resources location="/js/" mapping="/js/**"/>
 	<mvc:resources location="/img/" mapping="/img/**"/>
 	<mvc:resources location="/hplus/" mapping="/hplus/**"/>
+	<mvc:resources location="/cropper/" mapping="/cropper/**"/>
 	
 	<!-- 开启aop代理 -->
 	<aop:config proxy-target-class="true"></aop:config>
@@ -43,12 +44,18 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
+	<!-- 文件上传解析器 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10240000"></property>
+	</bean>
+	
 	<!-- 全局异常处理器 -->
-	<bean class="com.jw.exception.CustomExceptionResolver"></bean>
+	<!-- <bean class="com.jw.exception.CustomExceptionResolver"></bean> -->
 
 	<!-- 引用dubbo服务 -->
 	<dubbo:application name="auto-manager-web"/>
 	<dubbo:registry protocol="zookeeper" address="47.96.182.243:2181"/>	
 	<dubbo:reference interface="com.jw.service.UserService" id="userService" timeout="300000" />
 	<dubbo:reference interface="com.jw.service.RoleService" id="roleService" timeout="300000" />
+	<dubbo:reference interface="com.jw.service.CarBrandService" id="carBrandService" timeout="300000" />
 </beans>

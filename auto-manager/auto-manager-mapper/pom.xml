@@ -9,7 +9,7 @@
 	<artifactId>auto-manager-mapper</artifactId>
 
 	<dependencies>
-		<!-- 添加对mybatis的依赖 -->
+		<!-- Mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>

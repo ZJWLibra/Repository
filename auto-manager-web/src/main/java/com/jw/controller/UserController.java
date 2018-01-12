@@ -1,10 +1,7 @@
 package com.jw.controller;
 
-import java.text.ParseException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jw.model.User;
 import com.jw.model.common.AutoResult;
 import com.jw.model.common.AutoTree;
+import com.jw.model.common.JqgridResult;
 import com.jw.service.RoleService;
 import com.jw.service.UserService;
 import com.jw.shiro.realm.CustomRealm;
@@ -43,31 +41,10 @@ public class UserController {
 	
 	@RequestMapping("/list")
 	@RequiresPermissions("user:list")
-	public @ResponseBody Map<String, Object> list(User user) {
-		// 总记录
-		user.setRecords(userService.count(user));
-		// 总页数
-		user.setTotal((user.getRecords() + user.getRows() - 1) / user.getRows());
-		// 开始查询第几条数据
-		user.setStartData((user.getPage() - 1) * user.getRows());
+	public @ResponseBody JqgridResult<User> list(User user) {
+		JqgridResult<User> result = userService.list(user);
 		
-		// 添加默认排序规则
-		if (user.getSidx() == null || user.getSidx().equals("")) {
-			// 根据创建时间倒序
-			user.setSidx("userCreatedTime");
-			user.setSord("desc");
-		}
-		
-		List<User> list = userService.list(user);
-		
-		Map<String, Object> map = new HashMap<>();
-		
-		map.put("page", user.getPage());
-		map.put("records", user.getRecords());
-		map.put("total", user.getTotal());
-		map.put("rows", list);
-		
-		return map;
+		return result;
 	}
 	
 	/**
@@ -80,12 +57,8 @@ public class UserController {
 	public @ResponseBody AutoResult insert(User user, String strUserBirthday) {
 		Date userBirthday = null;
 		
-		try {
-			if (strUserBirthday != null && !strUserBirthday.equals("")) {
-				userBirthday = DateUtil.StringToDate(strUserBirthday, "yyyy-MM-dd");
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
+		if (strUserBirthday != null && !strUserBirthday.equals("")) {
+			userBirthday = DateUtil.stringToDate(strUserBirthday, "yyyy-MM-dd");
 		}
 		
 		// 设置用户密码
@@ -155,19 +128,14 @@ public class UserController {
 		Date userCreatedTime = null;
 		Date userLoginedTime = null;
 		
-		try {
-			if (strUserBirthday != null && !strUserBirthday.equals("")) {
-				userBirthday = DateUtil.StringToDate(strUserBirthday, "yyyy-MM-dd");
-			}
-			if (strUserCreatedTime != null && !strUserCreatedTime.equals("")) {
-				userCreatedTime = DateUtil.StringToDate(strUserCreatedTime, "yyyy-MM-dd HH:mm:ss");
-			}
-			if (strUserLoginedTime != null && !strUserLoginedTime.equals("")) {
-				userLoginedTime = DateUtil.StringToDate(strUserLoginedTime, "yyyy-MM-dd HH:mm:ss");
-			}
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
+		if (strUserBirthday != null && !strUserBirthday.equals("")) {
+			userBirthday = DateUtil.stringToDate(strUserBirthday, "yyyy-MM-dd");
+		}
+		if (strUserCreatedTime != null && !strUserCreatedTime.equals("")) {
+			userCreatedTime = DateUtil.stringToDate(strUserCreatedTime, "yyyy-MM-dd HH:mm:ss");
+		}
+		if (strUserLoginedTime != null && !strUserLoginedTime.equals("")) {
+			userLoginedTime = DateUtil.stringToDate(strUserLoginedTime, "yyyy-MM-dd HH:mm:ss");
 		}
 		
 		user.setUserBirthday(userBirthday);

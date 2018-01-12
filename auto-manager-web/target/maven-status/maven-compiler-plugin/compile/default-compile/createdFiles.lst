@@ -1,3 +1,4 @@
+com\jw\controller\CarBrandController.class
 com\jw\controller\LoginController.class
 com\jw\exception\CustomExceptionResolver.class
 com\jw\shiro\filter\CustomFormAuthenticationFilter.class

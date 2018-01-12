@@ -19,6 +19,7 @@ import com.jw.model.User;
 import com.jw.model.UserRole;
 import com.jw.model.common.AutoResult;
 import com.jw.model.common.AutoTree;
+import com.jw.model.common.JqgridResult;
 import com.jw.service.UserService;
 
 @Service
@@ -78,15 +79,30 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> list(User t) {
-		
+	public JqgridResult<User> list(User t) {
+		JqgridResult<User> result = new JqgridResult<>();
+		Long count;
+		List<User> list;
+		// 添加默认排序规则
+		if (t.getSidx() == null || t.getSidx().equals("")) {
+			// 根据创建时间倒序
+			t.setSidx("userCreatedTime");
+			t.setSord("desc");
+		}
 		try {
-			return userMapper.list(t);
+			count = userMapper.count(t);
+			list = userMapper.list(t);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 		
-		return null;
+		result.setPage(t.getPage());
+		result.setRecords(count);
+		result.setRows(list);
+		result.setTotal(result.getTotal(t.getRows()));
+		
+		return result;
 	}
 
 	@Override
@@ -94,18 +110,6 @@ public class UserServiceImpl implements UserService {
 
 		try {
 			return userMapper.get(t);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-
-	@Override
-	public Integer count(User t) {
-		
-		try {
-			return userMapper.count(t);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

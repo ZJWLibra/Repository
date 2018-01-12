@@ -22,9 +22,9 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
 		// 没有权限
 		if (e instanceof UnauthorizedException) {
 			mav.setViewName("error/403");
-		} else {
+		} /*else {
 			mav.setViewName("error/500");
-		}
+		}*/
 		
 		return mav;
 	}

@@ -14,5 +14,5 @@ public interface BaseMapper<T> {
 	
 	T get(T t) throws Exception;
 	
-	Integer count(T t) throws Exception;
+	Long count(T t) throws Exception;
 }

@@ -1,8 +1,7 @@
 package com.jw.base;
 
-import java.util.List;
-
 import com.jw.model.common.AutoResult;
+import com.jw.model.common.JqgridResult;
 
 public interface BaseService<T> {
 	
@@ -12,9 +11,8 @@ public interface BaseService<T> {
 	
 	AutoResult update(T t);
 	
-	List<T> list(T t);
+	JqgridResult<T> list(T t);
 	
 	T get(T t);
 	
-	Integer count(T t);
 }

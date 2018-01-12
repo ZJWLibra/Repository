@@ -23,3 +23,15 @@ function pageInit(tableId, caption, url, colNames, colModel) {
 	});
 	
 }
+
+$(function() {
+	// 关闭新增表单
+	$("#insert_close").click(function() {
+		$("#insert-form").modal("hide");
+	});
+	
+	// 关闭编辑表单
+	$("#edit_close").click(function() {
+		$("#edit-form").modal("hide");
+	});
+});

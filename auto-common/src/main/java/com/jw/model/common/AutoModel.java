@@ -6,58 +6,42 @@ public class AutoModel implements Serializable {
 	private static final long serialVersionUID = 4925999999652168959L;
 
 	// 要查询的页数
-	private Integer page;
+	private Long page;
 	// 每页显示条数
-	private Integer rows;
-	// 总记录数
-	private Integer records;
-	// 总页数
-	private Integer total;
-	// 开始条数
-	private Integer startData;
+	private Long rows;
+	// 开始查询的下标
+	private Long beginIndex;
 	// 排序字段
 	private String sidx;
 	// 排序方式
 	private String sord;
 
-	public Integer getPage() {
+	public Long getPage() {
 		return page;
 	}
 
-	public void setPage(Integer page) {
+	public void setPage(Long page) {
 		this.page = page;
 	}
 
-	public Integer getRows() {
+	public Long getRows() {
 		return rows;
 	}
 
-	public void setRows(Integer rows) {
+	public void setRows(Long rows) {
 		this.rows = rows;
 	}
 
-	public Integer getRecords() {
-		return records;
+	public Long getBeginIndex() {
+		if (page != null && !page.equals("") && rows != null && !rows.equals("")) {
+			return (page - 1) * rows;
+		}
+		
+		return beginIndex;
 	}
 
-	public void setRecords(Integer records) {
-		this.records = records;
-	}
-
-	public Integer getTotal() {
-		return total;
-	}
-
-	public void setTotal(Integer total) {
-		this.total = total;
-	}
-
-	public Integer getStartData() {
-		return startData;
-	}
-
-	public void setStartData(Integer startData) {
-		this.startData = startData;
+	public void setBeginIndex(Long beginIndex) {
+		this.beginIndex = beginIndex;
 	}
 
 	public String getSidx() {

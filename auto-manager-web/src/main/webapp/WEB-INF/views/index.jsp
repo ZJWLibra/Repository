@@ -4,7 +4,7 @@
 String path = request.getContextPath();
 %>
 
-<!DOCTYPE HTML">
+<!DOCTYPE HTML>
 <html>
 <head>
 	<base href="<%=path%>/">
@@ -62,12 +62,21 @@ String path = request.getContextPath();
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
-                            	<%-- <shiro:hasPermission name="user:list"> --%>
                                 <a class="J_menuItem" href="user/toIndex" data-index="0">用户管理</a>
-                                <%-- </shiro:hasPermission> --%>
-                                <%-- <shiro:hasPermission name="role:list"> --%>
                                 <a class="J_menuItem" href="role/toIndex" data-index="0">角色管理</a>
-                                <%-- </shiro:hasPermission> --%>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="hplus/#">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">基础信息管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="user/toIndex" data-index="0">公司信息管理管理</a>
+                                <a class="J_menuItem" href="carBrand/toIndex" data-index="0">汽车品牌管理</a>
                             </li>
                         </ul>
                     </li>
