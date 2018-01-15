@@ -42,8 +42,16 @@ public class CarBrandServiceImpl implements CarBrandService {
 
 	@Override
 	public AutoResult update(CarBrand t) {
-		// TODO Auto-generated method stub
-		return null;
+		AutoResult result = new AutoResult();
+		try {
+			carBrandMapper.update(t);
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setStatus(500);
+			result.setMsg("修改失败");
+		}
+		result.setStatus(200);
+		return result;
 	}
 
 	@Override
@@ -67,8 +75,12 @@ public class CarBrandServiceImpl implements CarBrandService {
 
 	@Override
 	public CarBrand get(CarBrand t) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return carBrandMapper.get(t);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

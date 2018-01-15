@@ -17,18 +17,18 @@ $(function() {
 	});
 	
 	// 编辑表单校验
-	$("#user_edit_form").validate({
+	$("#update_form").validate({
 		onfocusout : function(element) {
 			$(element).valid();
 		},
 		rules : {
-			userIdentity : {
-				rangelength : [18, 18]
-			},
+			brandName : {
+				required : true,
+			}
 		},
 		messages : {
-			userIdentity : {
-				rangelength : "请输入正确的身份证号码",
+			brandName : {
+				required : "请输入品牌名称",
 			}
 		}
 	});

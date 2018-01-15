@@ -58,7 +58,7 @@
                        	</form>
 						<div class="form-group">
 							<a class="btn btn-primary" href="carBrand/toAdd">新增</a>
-							<button data-toggle="button" class="btn btn-primary user-update" type="button">修改</button>
+							<button data-toggle="button" class="btn btn-primary carBrand-update" type="button">修改</button>
 						</div>
                         <div class="jqGrid_wrapper">
                             <table id="grid_table"></table>
@@ -175,6 +175,7 @@
     <script src="hplus/js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
     <script src="hplus/js/content.min.js?v=1.0.0"></script>
     <script src="hplus/js/plugins/layer/laydate/laydate.js"></script>
+    <script src="hplus/js/plugins/sweetalert/sweetalert.min.js"></script>
     
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/carBrand/carBrand.js"></script>

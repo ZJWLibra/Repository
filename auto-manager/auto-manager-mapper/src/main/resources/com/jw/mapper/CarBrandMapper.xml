@@ -13,6 +13,11 @@
 		</where>
 	</sql>
 	<sql id="query_get">
+		<where>
+			<if test="brandId != null and brandId !=''">
+				and brandId = #{brandId}
+			</if>
+		</where>
 	</sql>
 	
 	<select id="list" parameterType="CarBrand" resultType="CarBrand">

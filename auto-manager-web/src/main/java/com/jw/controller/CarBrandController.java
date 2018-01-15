@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -87,6 +89,23 @@ public class CarBrandController {
 	@RequestMapping("/insert")
 	public @ResponseBody AutoResult insert(CarBrand carBrand) {
 		AutoResult result = carBrandService.insert(carBrand);
+		
+		return result;
+	}
+	
+	@RequestMapping("/toEdit/{brandId}")
+	public String toEdit(@PathVariable String brandId, Model model) {
+		CarBrand carBrand = new CarBrand();
+		carBrand.setBrandId(brandId);
+		carBrand = carBrandService.get(carBrand);
+		
+		model.addAttribute("carBrand", carBrand);
+		return "carBrand/carBrandEdit";
+	}
+	
+	@RequestMapping("/update")
+	public @ResponseBody AutoResult update(CarBrand carBrand) {
+		AutoResult result = carBrandService.update(carBrand);
 		
 		return result;
 	}

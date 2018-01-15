@@ -19,6 +19,27 @@ $(function() {
 			}
 		});
 	});
+	
+	// 修改
+	$("#update_submit").click(function() {
+		if (!$("#update_form").valid()) {
+			return;
+		}
+		
+		$.ajax({
+			type : "POST",
+			url : "carBrand/update",
+			data : $("#update_form").serialize(),
+			dataType : "JSON",
+			success : function(data) {
+				if (data.status == 200) {
+					window.location.href = "carBrand/toIndex";
+				} else {
+					swal("失败", data.msg);
+				}
+			}
+		});
+	});
 });
 
 $(function() {
