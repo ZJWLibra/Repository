@@ -2,7 +2,7 @@ package com.jw.model;
 
 import java.io.Serializable;
 
-import com.jw.model.common.AutoModel;
+import com.jw.common.AutoModel;
 
 public class Role extends AutoModel implements Serializable {
 	private static final long serialVersionUID = 2034470845886586328L;

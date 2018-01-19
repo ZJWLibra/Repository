@@ -48,7 +48,7 @@ $(function() {
 			if (value == "Y") {
 				return "启用";
 			} else {
-				return "停用";
+				return "禁用";
 			}
 		}
 	} ];

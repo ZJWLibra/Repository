@@ -30,7 +30,7 @@ $(function() {
 		}
 	} ];
 	// 初始化表格
-	pageInit("grid_table", "用户列表", "carBrand/list", colNames, colModel);
+	pageInit("grid_table", "品牌列表", "carBrand/list", colNames, colModel);
 	
 	// 多选框赋值
 	$("#grid_table").jqGrid('setGridParam',{ 
@@ -70,10 +70,10 @@ $(function() {
 		
 		// 判断是否有勾选
 		if (ids.length == 0) {
-			swal("请选择要修改的用户");
+			swal("请选择");
 			return;
 		} else if (ids.length > 1) {
-			swal("只能选择一个用户");
+			swal("只能选择一条数据");
 			return;
 		}
 		window.location.href = "carBrand/toEdit/" + ids[0];

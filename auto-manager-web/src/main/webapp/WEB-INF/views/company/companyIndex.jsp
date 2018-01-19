@@ -12,7 +12,7 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>用户管理</title>
+    <title>公司信息管理</title>
 
     <link rel="shortcut icon" href="hplus/favicon.ico"> <link href="hplus/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="hplus/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
@@ -41,14 +41,14 @@
             <div class="col-sm-12">
                 <div class="ibox ">
                     <div class="ibox-title">
-                        <h5>品牌管理</h5>
+                        <h5>公司信息管理</h5>
                     </div>
                     <div class="ibox-content">
                        	<form class="form-inline">
-                       		<label class="control-label">品牌名称:</label>
-                        	<input type="text" placeholder="请输入品牌名称" class="form-control" id="selectBrandName" />
+                       		<label class="control-label">公司名称:</label>
+                        	<input type="text" placeholder="请输入公司名称" class="form-control" id="selectCompanyName" />
 							<label class="control-label">状态:</label>
-                        	<select class="form-control m-b" style="width:100px;margin-top:15px" id="selectBrandStatus">
+                        	<select class="form-control m-b" style="width:100px;margin-top:15px" id="selectCompanyStatus">
                         		<option value="">请选择</option>
 								<option value="Y">启用</option>
 								<option value="N">停用</option>
@@ -57,8 +57,8 @@
 							<button type="reset" class="btn btn-outline btn-primary">重置</button>
                        	</form>
 						<div class="form-group">
-							<a class="btn btn-primary" href="carBrand/toAdd">新增</a>
-							<button data-toggle="button" class="btn btn-primary carBrand-update" type="button">修改</button>
+							<a class="btn btn-primary" href="company/toAdd">新增</a>
+							<button data-toggle="button" class="btn btn-primary company-update" type="button">修改</button>
 						</div>
                         <div class="jqGrid_wrapper">
                             <table id="grid_table"></table>
@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-
+    
     <script src="hplus/js/jquery.min.js?v=2.1.4"></script>
     <script src="hplus/js/bootstrap.min.js?v=3.3.6"></script>
     <script src="hplus/js/plugins/peity/jquery.peity.min.js"></script>
@@ -80,6 +80,6 @@
     <script src="hplus/js/plugins/sweetalert/sweetalert.min.js"></script>
     
     <script type="text/javascript" src="js/common.js"></script>
-    <script type="text/javascript" src="js/carBrand/carBrand.js"></script>
+    <script type="text/javascript" src="js/company/company.js"></script>
 </body>
 </html>

@@ -75,7 +75,7 @@ String path = request.getContextPath();
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a class="J_menuItem" href="user/toIndex" data-index="0">公司信息管理管理</a>
+                                <a class="J_menuItem" href="company/toIndex" data-index="0">公司信息管理</a>
                                 <a class="J_menuItem" href="carBrand/toIndex" data-index="0">汽车品牌管理</a>
                             </li>
                         </ul>

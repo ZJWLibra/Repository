@@ -89,10 +89,10 @@ $(function() {
 		
 		// 判断是否有勾选
 		if (ids.length == 0) {
-			swal("请选择要修改的角色");
+			swal("请选择");
 			return;
 		} else if (ids.length > 1) {
-			swal("只能选择一个角色");
+			swal("只能选择一条记录");
 			return;
 		}
 		
@@ -114,7 +114,7 @@ $(function() {
 		});
 	});
 	
-	// 修改用户信息
+	// 修改角色信息
 	$("#edit_submit").click(function() {
 		if (!$("#role_edit_form").valid()) {
 			return;

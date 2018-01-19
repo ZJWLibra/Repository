@@ -6,7 +6,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.jw.model.common.AutoModel;
+import com.jw.common.AutoModel;
 
 public class User extends AutoModel implements Serializable {
 	private static final long serialVersionUID = -1992178596531639733L;

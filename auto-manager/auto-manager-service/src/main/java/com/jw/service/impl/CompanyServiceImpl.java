@@ -9,22 +9,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jw.common.AutoResult;
 import com.jw.common.JqgridResult;
-import com.jw.mapper.CarBrandMapper;
-import com.jw.model.CarBrand;
-import com.jw.service.CarBrandService;
+import com.jw.mapper.CompanyMapper;
+import com.jw.model.Company;
+import com.jw.service.CompanyService;
 
 @Service
 @Transactional
-public class CarBrandServiceImpl implements CarBrandService {
-
+public class CompanyServiceImpl implements CompanyService {
+	
 	@Resource
-	private CarBrandMapper carBrandMapper;
+	private CompanyMapper companyMapper;
 
 	@Override
-	public AutoResult insert(CarBrand t) {
+	public AutoResult insert(Company t) {
 		AutoResult result = new AutoResult();
 		try {
-			carBrandMapper.insert(t);
+			companyMapper.insert(t);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setStatus(500);
@@ -36,15 +36,14 @@ public class CarBrandServiceImpl implements CarBrandService {
 
 	@Override
 	public AutoResult delete(String[] ids) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public AutoResult update(CarBrand t) {
+	public AutoResult update(Company t) {
 		AutoResult result = new AutoResult();
 		try {
-			carBrandMapper.update(t);
+			companyMapper.update(t);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setStatus(500);
@@ -55,17 +54,17 @@ public class CarBrandServiceImpl implements CarBrandService {
 	}
 
 	@Override
-	public JqgridResult<CarBrand> list(CarBrand t) {
+	public JqgridResult<Company> list(Company t) {
 		Long count;
-		List<CarBrand> list;
+		List<Company> list;
 		try {
-			count = carBrandMapper.count(t);
-			list = carBrandMapper.list(t);
+			count = companyMapper.count(t);
+			list = companyMapper.list(t);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-		JqgridResult<CarBrand> result = new JqgridResult<>();
+		JqgridResult<Company> result = new JqgridResult<>();
 		result.setPage(t.getPage());
 		result.setRecords(count);
 		result.setRows(list);
@@ -74,9 +73,9 @@ public class CarBrandServiceImpl implements CarBrandService {
 	}
 
 	@Override
-	public CarBrand get(CarBrand t) {
+	public Company get(Company t) {
 		try {
-			return carBrandMapper.get(t);
+			return companyMapper.get(t);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

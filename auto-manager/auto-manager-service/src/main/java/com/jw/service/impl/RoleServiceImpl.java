@@ -9,15 +9,15 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jw.common.AutoResult;
+import com.jw.common.AutoTree;
+import com.jw.common.JqgridResult;
 import com.jw.mapper.PermissionMapper;
 import com.jw.mapper.RoleMapper;
 import com.jw.mapper.RolePermissionMapper;
 import com.jw.model.Permission;
 import com.jw.model.Role;
 import com.jw.model.RolePermission;
-import com.jw.model.common.AutoResult;
-import com.jw.model.common.AutoTree;
-import com.jw.model.common.JqgridResult;
 import com.jw.service.RoleService;
 
 @Service

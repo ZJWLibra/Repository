@@ -2,6 +2,7 @@ package com.jw.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,42 +19,45 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.aliyun.oss.OSSClient;
 import com.jw.common.AutoResult;
 import com.jw.common.JqgridResult;
-import com.jw.model.CarBrand;
-import com.jw.service.CarBrandService;
+import com.jw.model.Company;
+import com.jw.service.CompanyService;
+import com.jw.util.DateUtil;
 import com.jw.util.OSSUtil;
 
 /**
- * 汽车品牌
+ * 公司信息
+ * 
  * @author Zeng
  *
  */
 @Controller
-@RequestMapping("/carBrand")
-public class CarBrandController {
+@RequestMapping("/company")
+public class CompanyController {
 	
 	@Resource
-	private CarBrandService carBrandService;
+	private CompanyService companyService;
 	
 	@Value("${OSS_BUCKET_NAME}")
 	private String OSS_BUCKET_NAME;
-	@Value("${OSS_CAR_BRAND}")
-	private String OSS_CAR_BRAND;
+	@Value("${OSS_COMPANY}")
+	private String OSS_COMPANY;
 	
 	@RequestMapping("/toIndex")
 	public String toIndex() {
-		return "carBrand/carBrandIndex";
+		return "company/companyIndex";
 	}
 	
 	@RequestMapping("/list")
-	public @ResponseBody JqgridResult<CarBrand> list(CarBrand carBrand) {
-		JqgridResult<CarBrand> result = carBrandService.list(carBrand);
+	public @ResponseBody JqgridResult<Company> list(Company company) {
+		JqgridResult<Company> result = companyService.list(company);
 		
 		return result;
 	}
 	
 	@RequestMapping("/toAdd")
 	public String toAdd() {
-		return "carBrand/carBrandAdd";
+		
+		return "company/companyAdd";
 	}
 	
 	@RequestMapping("/upload")
@@ -68,7 +72,7 @@ public class CarBrandController {
 		
 		// 获取文件新名称
 		String newFileName = OSSUtil.getNewFileName() + suffix;
-		String key = OSS_CAR_BRAND + newFileName;
+		String key = OSS_COMPANY + newFileName;
 		
 		InputStream is = null;
 		try {
@@ -81,31 +85,37 @@ public class CarBrandController {
 		}
 
 		// 文件的相对路径
-		String relativePath = OSS_CAR_BRAND + newFileName;
+		String relativePath = OSS_COMPANY + newFileName;
 		String jsonStr = "{\"relativePath\" : \"" + relativePath + "\"}";
 		return jsonStr;
 	}
 	
 	@RequestMapping("/insert")
-	public @ResponseBody AutoResult insert(CarBrand carBrand) {
-		AutoResult result = carBrandService.insert(carBrand);
-		
+	public @ResponseBody AutoResult insert(Company company, String strCompanyOpenDate) {
+		if (strCompanyOpenDate != null && !strCompanyOpenDate.equals("")) {
+			Date companyOpenDate = DateUtil.stringToDate(strCompanyOpenDate, "yyyy-MM-dd");
+			company.setCompanyOpenDate(companyOpenDate);
+		}
+		company.setCreateTime(new Date());
+		AutoResult result = companyService.insert(company);
 		return result;
 	}
 	
-	@RequestMapping("/toEdit/{brandId}")
-	public String toEdit(@PathVariable String brandId, Model model) {
-		CarBrand carBrand = new CarBrand();
-		carBrand.setBrandId(brandId);
-		carBrand = carBrandService.get(carBrand);
-		
-		model.addAttribute("carBrand", carBrand);
-		return "carBrand/carBrandEdit";
+	@RequestMapping("/toEdit/{id}")
+	public String toEdit(@PathVariable String id, Model model) {
+		Company company = new Company();
+		company.setCompanyId(id);
+		company = companyService.get(company);
+		model.addAttribute("company", company);
+		return "company/companyEdit";
 	}
 	
 	@RequestMapping("/update")
-	public @ResponseBody AutoResult update(CarBrand carBrand) {
-		AutoResult result = carBrandService.update(carBrand);
+	public @ResponseBody AutoResult update(Company company, String strCompanyOpenDate) {
+		if (strCompanyOpenDate != null && !strCompanyOpenDate.equals("")) {
+			company.setCompanyOpenDate(DateUtil.stringToDate(strCompanyOpenDate, "yyyy-MM-dd"));
+		}
+		AutoResult result = companyService.update(company);
 		
 		return result;
 	}

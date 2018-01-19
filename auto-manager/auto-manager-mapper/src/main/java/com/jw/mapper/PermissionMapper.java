@@ -2,7 +2,6 @@ package com.jw.mapper;
 
 import java.util.List;
 
-import com.jw.base.BaseMapper;
 import com.jw.model.Permission;
 
 public interface PermissionMapper extends BaseMapper<Permission> {
