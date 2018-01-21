@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jw.mapper.CarModelMapper">
+	<resultMap type="CarModel" id="carModelResultMap">
+		<id column="modelId" property="modelId" />
+		<result column="modelName" property="modelName" />
+		<result column="modelDes" property="modelDes" />
+		<result column="companyTel" property="companyTel" />
+		<result column="brandId" property="brandId" />
+		<result column="modelStatus" property="modelStatus" />
+		<association property="carBrand" javaType="CarBrand">
+			<id column="brandId" property="brandId" />
+			<result column="brandName" property="brandName" />
+		</association>
+	</resultMap>
+
+	<sql id="query_list">
+		<if test="modelName != null and modelName != ''">
+			and m.modelName like '%${modelName}%'
+		</if>
+		<if test="brandId != null and brandId != ''">
+			and m.brandId = #{brandId}
+		</if>
+		<if test="modelStatus != null and modelStatus != ''">
+			and m.modelStatus = #{modelStatus}
+		</if>
+	</sql>
+	<sql id="query_get">
+		<if test="modelId != null and modelId != ''">
+			and m.modelId = #{modelId}
+		</if>
+	</sql>
+	
+	<select id="list" parameterType="CarModel" resultMap="carModelResultMap">
+		select * from t_car_model m, t_car_brand b where m.brandId = b.brandId
+		<include refid="query_list"></include>
+		<include refid="com.jw.mapper.UserMapper.sort"></include>
+		<include refid="com.jw.mapper.UserMapper.page"></include>
+	</select>
+	
+	<select id="get" parameterType="CarModel" resultMap="carModelResultMap">
+		select * from t_car_model m, t_car_brand b where m.brandId = b.brandId
+		<include refid="query_get"></include>
+	</select>
+	
+	<select id="count" parameterType="CarModel" resultType="java.lang.Long">
+		select count(*) from t_car_model m, t_car_brand b where m.brandId = b.brandId
+		<include refid="query_list"></include>
+	</select>
+	
+	<insert id="insert" parameterType="CarModel">
+		insert into t_car_model (
+			modelId,
+			modelName,
+			modelDes,
+			brandId,
+			modelStatus
+		)
+		values (
+			UUID(),
+			#{modelName},
+			#{modelDes},
+			#{brandId},
+			#{modelStatus}
+		)
+	</insert>
+
+	<update id="update" parameterType="CarModel">
+		update t_car_model set modelName = #{modelName},
+			modelDes = #{modelDes},
+			brandId = #{brandId},
+			modelStatus = #{modelStatus}
+			where modelId = #{modelId}
+	</update>
+	
+	<delete id="delete" parameterType="CarModel">
+		delete from t_car_model
+		<where>
+			<if test="brandId != null and brandId != ''">
+				and modelId = #{modelId}
+			</if>
+		</where>
+	</delete>
+
+</mapper>
