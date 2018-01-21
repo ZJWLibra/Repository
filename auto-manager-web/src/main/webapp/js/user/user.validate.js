@@ -1,6 +1,6 @@
 $(function() {
 	// 新增表单校验
-	$("#user_insert_form").validate({
+	$("#insertForm").validate({
 		onfocusout : function(element) {
 			$(element).valid();
 		},
@@ -30,7 +30,7 @@ $(function() {
 			},
 			userPwd : {
 				required : true,
-				min : 6
+				minlength : 6
 			},
 			userPwd2 : {
 				required : true,
@@ -52,7 +52,7 @@ $(function() {
 			},
 			userPwd : {
 				required : "请输入密码",
-				min : "密码长度最小为6位"
+				minlength : "密码长度最小为6位"
 			},
 			userPwd2 : {
 				required : "请确认密码",
@@ -65,7 +65,7 @@ $(function() {
 	});
 	
 	// 编辑表单校验
-	$("#user_edit_form").validate({
+	$("#editForm").validate({
 		onfocusout : function(element) {
 			$(element).valid();
 		},

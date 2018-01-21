@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 %>
 
-<!DOCTYPE HTML>
+<!DOCTYPE>
 <html>
 <head>
 	<base href="<%=path%>/">

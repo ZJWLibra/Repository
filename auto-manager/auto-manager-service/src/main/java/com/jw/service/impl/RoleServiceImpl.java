@@ -26,10 +26,8 @@ public class RoleServiceImpl implements RoleService {
 
 	@Resource
 	private RoleMapper roleMapper;
-	
 	@Resource
 	private PermissionMapper permissionMapper;
-	
 	@Resource
 	private RolePermissionMapper rolePermissionMapper;
 	
@@ -41,14 +39,12 @@ public class RoleServiceImpl implements RoleService {
 			e.printStackTrace();
 			return AutoResult.error("添加失败");
 		}
-		
-		return AutoResult.ok();
+		return AutoResult.success();
 	}
 
 	@Override
 	public AutoResult delete(String[] ids) {
 		Role role = null;
-		
 		for (String id : ids) {
 			role = new Role();
 			role.setRoleId(id);
@@ -59,8 +55,7 @@ public class RoleServiceImpl implements RoleService {
 				return AutoResult.error("删除失败");
 			}
 		}
-		
-		return AutoResult.ok();
+		return AutoResult.success();
 	}
 
 	@Override
@@ -71,17 +66,14 @@ public class RoleServiceImpl implements RoleService {
 			e.printStackTrace();
 			return AutoResult.error("修改失败");
 		}
-		
-		return AutoResult.ok();
+		return AutoResult.success();
 	}
 
 	@Override
 	public JqgridResult<Role> list(Role t) {
 		JqgridResult<Role> result = new JqgridResult<>();
-		
 		Long count;
 		List<Role> list;
-		
 		try {
 			count = roleMapper.count(t);
 			list = roleMapper.list(t);
@@ -89,12 +81,10 @@ public class RoleServiceImpl implements RoleService {
 			e.printStackTrace();
 			return null;
 		}
-		
 		result.setPage(t.getPage());
 		result.setRecords(count);
 		result.setRows(list);
 		result.setTotal(result.getTotal(t.getRows()));
-		
 		return result;
 	}
 	
@@ -104,9 +94,8 @@ public class RoleServiceImpl implements RoleService {
 			return roleMapper.get(t);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		
-		return null;
 	}
 
 	/**
@@ -122,7 +111,6 @@ public class RoleServiceImpl implements RoleService {
 			e.printStackTrace();
 			return null;
 		}
-		
 		// 角色拥有的权限
 		List<Permission> rolePermissionList = null;
 		try {
@@ -130,17 +118,14 @@ public class RoleServiceImpl implements RoleService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		List<AutoTree> autoTreeList = new ArrayList<>();
 		AutoTree autoTree = null;
 		if (permissionList != null && permissionList.size() > 0) {
-			
 			for (Permission permission : permissionList) {
 				autoTree = new AutoTree();
 				autoTree.setId(permission.getPermissionId());
 				autoTree.setName(permission.getPermissionName());
 				autoTree.setpId(permission.getPermissionParentid());
-				
 				for (Permission userPermission : rolePermissionList) {
 					// 已有权限默认选中
 					if (permission.getPermissionId().equals(userPermission.getPermissionId())) {
@@ -150,7 +135,6 @@ public class RoleServiceImpl implements RoleService {
 				autoTreeList.add(autoTree);
 			}
 		}
-		
 		return autoTreeList;
 	}
 
@@ -168,7 +152,6 @@ public class RoleServiceImpl implements RoleService {
 			e.printStackTrace();
 			return AutoResult.error("授权失败");
 		}
-		
 		// 授权
 		RolePermission rolePermission = null;
 		for (String id : ids) {
@@ -183,8 +166,7 @@ public class RoleServiceImpl implements RoleService {
 				AutoResult.error("授权失败");
 			}
 		}
-		
-		return AutoResult.ok();
+		return AutoResult.success();
 	}
 
 }

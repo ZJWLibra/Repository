@@ -1,6 +1,6 @@
 $(function() {
 	// 新增表单校验
-	$("#role_insert_form").validate({
+	$("#insertForm").validate({
 		onfocusout : function(element) {
 			$(element).valid();
 		},
@@ -23,7 +23,7 @@ $(function() {
 	});
 	
 	// 编辑表单校验
-	$("#user_edit_form").validate({
+	$("#editForm").validate({
 		onfocusout : function(element) {
 			$(element).valid();
 		},

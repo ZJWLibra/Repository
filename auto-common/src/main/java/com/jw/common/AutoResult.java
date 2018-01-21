@@ -44,11 +44,11 @@ public class AutoResult implements Serializable {
 		return new AutoResult(status, msg, data);
 	}
 	
-	public static AutoResult ok() {
+	public static AutoResult success() {
 		return new AutoResult(null);
 	}
 
-	public static AutoResult ok(Object data) {
+	public static AutoResult success(Object data) {
 		return new AutoResult(data);
 	}
 

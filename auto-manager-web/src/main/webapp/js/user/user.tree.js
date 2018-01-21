@@ -10,10 +10,10 @@ $(function() {
 		
 		// 判断是否有勾选
 		if (ids.length == 0) {
-			swal("请选择要修改的用户");
+			swal("请选择");
 			return;
 		} else if (ids.length > 1) {
-			swal("只能选择一个用户");
+			swal("只能选择一条记录");
 			return;
 		}
 		

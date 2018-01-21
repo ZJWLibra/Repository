@@ -10,10 +10,10 @@ $(function() {
 		
 		// 判断是否有勾选
 		if (ids.length == 0) {
-			swal("请选择要授权的角色");
+			swal("请选择");
 			return;
 		} else if (ids.length > 1) {
-			swal("只能选择一个角色");
+			swal("只能选择一条数据");
 			return;
 		}
 		
@@ -71,7 +71,7 @@ $(function() {
 			data : {"ids" : ids, "roleId" : $("#roleId").val()},
 			success : function(data) {
 				if (data.status == "200") {
-					swal("成功", "添加成功", "success");
+					swal("成功", "授权成功", "success");
 					$("#permission_modal").modal("hide");
 				} else {
 					swal("失败", data.msg);

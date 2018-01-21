@@ -3,7 +3,6 @@
 <%
 String path = request.getContextPath();
 %>
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -55,7 +54,7 @@ String path = request.getContextPath();
 							</shiro:hasPermission>
 						</div>
                         <div class="jqGrid_wrapper">
-                            <table id="role_table"></table>
+                            <table id="grid_table"></table>
                             <div id="table_page"></div>
                         </div>
                     </div>
@@ -72,13 +71,13 @@ String path = request.getContextPath();
                     <div class="row">
                         <div class="col-sm-12">
                             <h3 class="m-t-none m-b">新增角色</h3>
-                            <form role="form" id="role_insert_form">
+                            <form id="insertForm">
                                 <div class="form-group">
-                                    <label class="must-label">名称(必填):</label>
+                                    <label class="must-label">角色名称(必填):</label>
                                     <input type="text" placeholder="请输入名称" class="form-control" id="roleName" name="roleName" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="must-label">描述(必填):</label>
+                                    <label class="must-label">角色描述(必填):</label>
                                     <input type="text" placeholder="请输入描述" class="form-control" id="roleDes" name="roleDes" />
                                 </div>
                                 <div class="form-group">
@@ -111,20 +110,20 @@ String path = request.getContextPath();
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h3 class="m-t-none m-b">编辑用户</h3>
-                            <form role="form" id="role_edit_form">
-                            	<input type="hidden" id="edit_roleId" name="roleId" />
+                            <h3 class="m-t-none m-b">编辑角色</h3>
+                            <form role="form" id="editForm">
+                            	<input type="hidden" id="editRoleId" name="roleId" />
                                 <div class="form-group">
-                                    <label class="must-label">名称(必填):</label>
-                                    <input type="text" placeholder="请输入名称" class="form-control" id="edit_roleName" name="roleName" />
+                                    <label class="must-label">角色名称(必填):</label>
+                                    <input type="text" placeholder="请输入名称" class="form-control" id="editRoleName" name="roleName" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="must-label">描述(必填):</label>
-                                    <input type="text" placeholder="请输入描述" class="form-control" id="edit_roleDes" name="roleDes" />
+                                    <label class="must-label">角色描述(必填):</label>
+                                    <input type="text" placeholder="请输入描述" class="form-control" id="editRoleDes" name="roleDes" />
                                 </div>
                                 <div class="form-group">
                                     <label>状态:</label>
-                                    <select class="form-control m-b" id="edit_roleStatus" name="roleStatus">
+                                    <select class="form-control m-b" id="editRoleStatus" name="roleStatus">
 										<option value="Y">启用</option>
 										<option value="N">禁用</option>
 									</select>
@@ -191,12 +190,12 @@ String path = request.getContextPath();
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/role/role.js"></script>
     <script type="text/javascript" src="js/role/role.validate.js"></script>
+    <script type="text/javascript" src="js/role/role.tree.js"></script>
     
     <!-- ztree -->
     <script type="text/javascript" src="js/ztree/jquery.ztree.core.js"></script>
     <script type="text/javascript" src="js/ztree/jquery.ztree.excheck.js"></script>
     <script type="text/javascript" src="js/ztree/jquery.ztree.exedit.js"></script>
     
-    <script type="text/javascript" src="js/role/role.tree.js"></script>
 </body>
 </html>

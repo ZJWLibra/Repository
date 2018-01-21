@@ -4,7 +4,6 @@
 	String path = request.getContextPath();
 	ResourceBundle res = ResourceBundle.getBundle("config/oss");
 %>
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -12,7 +11,7 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>用户管理</title>
+    <title>品牌管理</title>
 
     <link rel="shortcut icon" href="hplus/favicon.ico"> <link href="hplus/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="hplus/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">

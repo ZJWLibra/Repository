@@ -59,4 +59,5 @@
 	<dubbo:reference interface="com.jw.service.RoleService" id="roleService" timeout="300000" />
 	<dubbo:reference interface="com.jw.service.CarBrandService" id="carBrandService" timeout="300000" />
 	<dubbo:reference interface="com.jw.service.CompanyService" id="companyService" timeout="300000" />
+	<dubbo:reference interface="com.jw.service.CarModelService" id="carModelService" timeout="300000" />
 </beans>

@@ -22,16 +22,12 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public AutoResult insert(Company t) {
-		AutoResult result = new AutoResult();
 		try {
 			companyMapper.insert(t);
 		} catch (Exception e) {
-			e.printStackTrace();
-			result.setStatus(500);
-			result.setMsg("新增失败");
+			return AutoResult.error("新增失败");
 		}
-		result.setStatus(200);
-		return result;
+		return AutoResult.success();
 	}
 
 	@Override
@@ -41,16 +37,13 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public AutoResult update(Company t) {
-		AutoResult result = new AutoResult();
 		try {
 			companyMapper.update(t);
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.setStatus(500);
-			result.setMsg("修改失败");
+			return AutoResult.error("修改失败");
 		}
-		result.setStatus(200);
-		return result;
+		return AutoResult.success();
 	}
 
 	@Override

@@ -81,7 +81,7 @@ $(function() {
 		}).trigger("reloadGrid");
 	});
 
-	// 弹出修改表单
+	// 跳转到修改页面
 	$(".company-update").click(function() {
 		var ids = [];
 		// 获取勾选数据

@@ -3,7 +3,6 @@
 <%
 String path = request.getContextPath();
 %>
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -76,7 +75,8 @@ String path = request.getContextPath();
                         <ul class="nav nav-second-level">
                             <li>
                                 <a class="J_menuItem" href="company/toIndex" data-index="0">公司信息管理</a>
-                                <a class="J_menuItem" href="carBrand/toIndex" data-index="0">汽车品牌管理</a>
+                                <a class="J_menuItem" href="carBrand/toIndex" data-index="0">品牌管理</a>
+                                <a class="J_menuItem" href="carModel/toIndex" data-index="0">车型管理</a>
                             </li>
                         </ul>
                     </li>

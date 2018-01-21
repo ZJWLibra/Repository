@@ -2,14 +2,12 @@
 <%
 String path = request.getContextPath();
 %>
-
 <!DOCTYPE HTML>
 <html>
 <head>
 	<base href="<%=path%>/">
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 
     <title>500错误</title>
 

@@ -2,7 +2,6 @@
 <%
 String path = request.getContextPath();
 %>
-
 <!DOCTYPE HTML>
 <html>
 <head>

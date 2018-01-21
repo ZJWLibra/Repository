@@ -1,5 +1,5 @@
 $(function() {
-	var colNames = ["id", "名称", "描述", "状态" ];
+	var colNames = ["id", "角色名称", "角色描述", "状态" ];
 	var colModel = [{
 		name : "roleId",
 		index : "roleId",
@@ -22,37 +22,32 @@ $(function() {
 		}
 	} ];
 	
-	pageInit("role_table", "角色列表", "role/list", colNames, colModel);
+	pageInit("grid_table", "角色列表", "role/list", colNames, colModel);
 	
 	// 多选框赋值
-	$("#role_table").jqGrid('setGridParam',{ 
+	$("#grid_table").jqGrid('setGridParam',{ 
 		gridComplete : function() {
-			var rowIds = jQuery("#role_table").jqGrid("getDataIDs");
+			var rowIds = jQuery("#grid_table").jqGrid("getDataIDs");
 			
 			for (var i = 0; i < rowIds.length; i++) {
-				var curRowData = jQuery("#role_table").jqGrid("getRowData", rowIds[i]);
-				var curChk = $("#jqg_role_table_" + (i + 1));
+				var curRowData = jQuery("#grid_table").jqGrid("getRowData", rowIds[i]);
+				var curChk = $("#jqg_grid_table_" + (i + 1));
 				curChk.attr("name", "roleId");
 				curChk.attr("value", curRowData.roleId);
 			}
 		}
     })
 	
-	// 关闭新增表单
-	$("#insert_close").click(function() {
-		$("#insert-form").modal("hide");
-	});
-	
 	// 新增
 	$("#insert_submit").click(function() {
-		if (!$("#role_insert_form").valid()) {
+		if (!$("#insertForm").valid()) {
 			return;
 		}
 		
 		$.ajax({
 			type : "POST",
 			url : "role/insert",
-			data : $("#role_insert_form").serialize(),
+			data : $("#insertForm").serialize(),
 			dataType : "JSON",
 			success : function(data) {
 				if (data.status == 200) {
@@ -60,22 +55,17 @@ $(function() {
 					// 关闭窗口
 					$("#insert-form").modal("hide");
 					// 重新加载数据
-					$("#role_table").jqGrid('setGridParam', {
+					$("#grid_table").jqGrid('setGridParam', {
 	    				url : "role/list",
 	    				page : 1
 	    			}).trigger("reloadGrid");
 					// 清空表单
-					$("#role_insert_form")[0].reset();
+					$("#insertForm")[0].reset();
 				} else {
 					swal("失败", data.msg);
 				}
 			}
 		});
-	});
-	
-	// 关闭编辑表单
-	$("#edit_close").click(function() {
-		$("#edit-form").modal("hide");
 	});
 	
 	// 弹出修改表单
@@ -92,7 +82,7 @@ $(function() {
 			swal("请选择");
 			return;
 		} else if (ids.length > 1) {
-			swal("只能选择一条记录");
+			swal("只能选择一条数据");
 			return;
 		}
 		
@@ -102,12 +92,11 @@ $(function() {
 			data : {"roleId" : ids[0]},
 			dataType : "JSON",
 			success : function(data) {
-				$("#edit_roleId").val(data.roleId);
-				
-				$("#edit_roleName").val(data.roleName);
-				$("#edit_roleDes").val(data.roleDes);
+				$("#editRoleId").val(data.roleId);
+				$("#editRoleName").val(data.roleName);
+				$("#editRoleDes").val(data.roleDes);
 				// 状态判断
-				$("#edit_roleStatus").find("option[value='" + data.roleStatus + "']").attr("selected", true);
+				$("#editRoleStatus").find("option[value='" + data.roleStatus + "']").attr("selected", true);
 
 				$("#edit-form").modal("show");
 			}
@@ -116,14 +105,14 @@ $(function() {
 	
 	// 修改角色信息
 	$("#edit_submit").click(function() {
-		if (!$("#role_edit_form").valid()) {
+		if (!$("#editForm").valid()) {
 			return;
 		}
 		
 		$.ajax({
 			type : "POST",
 			url : "role/update",
-			data : $("#role_edit_form").serialize(),
+			data : $("#editForm").serialize(),
 			dataType : "JSON",
 			success : function(data) {
 				if (data.status == 200) {
@@ -131,7 +120,7 @@ $(function() {
 					// 关闭窗口
 					$("#edit-form").modal("hide");
 					// 重新加载数据
-					$("#role_table").jqGrid('setGridParam', {
+					$("#grid_table").jqGrid('setGridParam', {
 	    				url : "role/list",
 	    				page : 1
 	    			}).trigger("reloadGrid");

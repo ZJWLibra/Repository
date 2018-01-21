@@ -22,16 +22,13 @@ public class CarBrandServiceImpl implements CarBrandService {
 
 	@Override
 	public AutoResult insert(CarBrand t) {
-		AutoResult result = new AutoResult();
 		try {
 			carBrandMapper.insert(t);
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.setStatus(500);
-			result.setMsg("新增失败");
+			return AutoResult.error("新增失败");
 		}
-		result.setStatus(200);
-		return result;
+		return AutoResult.success();
 	}
 
 	@Override
@@ -42,16 +39,13 @@ public class CarBrandServiceImpl implements CarBrandService {
 
 	@Override
 	public AutoResult update(CarBrand t) {
-		AutoResult result = new AutoResult();
 		try {
 			carBrandMapper.update(t);
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.setStatus(500);
-			result.setMsg("修改失败");
+			return AutoResult.error("修改失败");
 		}
-		result.setStatus(200);
-		return result;
+		return AutoResult.success();
 	}
 
 	@Override

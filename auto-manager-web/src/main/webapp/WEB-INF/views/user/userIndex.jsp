@@ -3,7 +3,6 @@
 <%
 String path = request.getContextPath();
 %>
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -45,16 +44,16 @@ String path = request.getContextPath();
                     <div class="ibox-content">
                        	<form class="form-inline">
                        		<label class="control-label">性别:</label>
-                        	<select class="form-control m-b" style="width:100px;margin-top:15px" id="user_gender">
+                        	<select class="form-control m-b" style="width:100px;margin-top:15px" id="selectUserGender">
                         		<option value="">请选择</option>
 								<option value="G">男</option>
 								<option value="M">女</option>
 							</select>
 							<label class="control-label">状态:</label>
-                        	<select class="form-control m-b" style="width:100px;margin-top:15px" id="user_status">
+                        	<select class="form-control m-b" style="width:100px;margin-top:15px" id="selectUserStatus">
                         		<option value="">请选择</option>
 								<option value="Y">启用</option>
-								<option value="N">停用</option>
+								<option value="N">禁用</option>
 							</select>
 							<button type="button" class="btn btn-outline btn-primary form_select">查询</button>
 							<button type="reset" class="btn btn-outline btn-primary">重置</button>
@@ -74,7 +73,7 @@ String path = request.getContextPath();
 							</shiro:hasPermission>
 						</div>
                         <div class="jqGrid_wrapper">
-                            <table id="user_table"></table>
+                            <table id="grid_table"></table>
                             <div id="table_page"></div>
                         </div>
                     </div>
@@ -91,7 +90,7 @@ String path = request.getContextPath();
                     <div class="row">
                         <div class="col-sm-12">
                             <h3 class="m-t-none m-b">新增用户</h3>
-                            <form role="form" id="user_insert_form" class="user-validate">
+                            <form id="insertForm">
                                 <div class="form-group">
                                     <label class="must-label">邮箱(必填):</label>
                                     <input type="text" placeholder="请输入邮箱" class="form-control" id="userEmail" name="userEmail" />
@@ -170,7 +169,7 @@ String path = request.getContextPath();
                                     <label>状态:</label>
                                     <select class="form-control m-b" id="userStatus" name="userStatus">
 										<option value="Y">启用</option>
-										<option value="N">停用</option>
+										<option value="N">禁用</option>
 									</select>
                                 </div>
                                 <div>
@@ -197,78 +196,78 @@ String path = request.getContextPath();
                     <div class="row">
                         <div class="col-sm-12">
                             <h3 class="m-t-none m-b">编辑用户</h3>
-                            <form role="form" id="user_edit_form">
-                            	<input type="hidden" id="edit_userId" name="userId" />
-                            	<input type="hidden" id="edit_userEmail" name="userEmail" />
-                            	<input type="hidden" id="edit_userPhone" name="userPhone" />
-                            	<input type="hidden" id="edit_userPwd" name="userPwd" />
-                            	<input type="hidden" id="edit_userSalt" name="userSalt" />
-                            	<input type="hidden" id="edit_userIcon" name="userIcon" />
-                            	<input type="hidden" id="edit_userCreatedTime" name="strUserCreatedTime" />
-                            	<input type="hidden" id="edit_userLoginedTime" name="strUserLoginedTime" />
+                            <form role="form" id="editForm">
+                            	<input type="hidden" id="editUserId" name="userId" />
+                            	<input type="hidden" id="editUserEmail" name="userEmail" />
+                            	<input type="hidden" id="editUserPhone" name="userPhone" />
+                            	<input type="hidden" id="editUserPwd" name="userPwd" />
+                            	<input type="hidden" id="editUserSalt" name="userSalt" />
+                            	<input type="hidden" id="editUserIcon" name="userIcon" />
+                            	<input type="hidden" id="editUserCreatedTime" name="strUserCreatedTime" />
+                            	<input type="hidden" id="editUserLoginedTime" name="strUserLoginedTime" />
                                 <div class="form-group">
                                     <label>昵称:</label>
-                                    <input type="text" placeholder="请输入昵称" class="form-control" id="edit_userNickname" name="userNickname" />
+                                    <input type="text" placeholder="请输入昵称" class="form-control" id="editUserNickname" name="userNickname" />
                                 </div>
                                 <div class="form-group">
                                     <label>身份证号码:</label>
-                                    <input type="text" placeholder="请输入身份证号码" class="form-control" id="edit_userIdentity" name="userIdentity" />
+                                    <input type="text" placeholder="请输入身份证号码" class="form-control" id="editUserIdentity" name="userIdentity" />
                                 </div>
                                 <div class="form-group">
                                     <label>真实姓名:</label>
-                                    <input type="text" placeholder="请输入真实姓名" class="form-control" id="edit_userName" name="userName" />
+                                    <input type="text" placeholder="请输入真实姓名" class="form-control" id="editUserName" name="userName" />
                                 </div>
                                 <div class="form-group">
                                     <label>性别:</label>
                                     <label class="form-inline" style="margin-left:10px">
-										男&nbsp;&nbsp;<input type="radio" id="edit_userGender1" name="userGender" value="G" />
+										男&nbsp;&nbsp;<input type="radio" id="editUserGender1" name="userGender" value="G" />
 									</label>
 									<label class="form-inline" style="margin-left:10px">
-										女&nbsp;&nbsp;<input type="radio" id="edit_userGender2" name="userGender" value="M" />
+										女&nbsp;&nbsp;<input type="radio" id="editUserGender2" name="userGender" value="M" />
 									</label>
                                 </div>
                                 <div class="form-group">
                                     <label>生日:</label>
                                     <div>
-                                        <input readonly type="text" class="form-control layer-date" id="edit_strUserBirthday" name="strUserBirthday" />
+                                        <input readonly type="text" class="form-control layer-date" id="editStrUserBirthday" name="strUserBirthday" />
                                         <label class="laydate-icon inline demoicon" onclick="laydate({elem: '#edit_strUserBirthday'});"></label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>地址:</label>
-                                    <input type="text" placeholder="请输入地址" class="form-control" id="edit_userAddress" name="userAddress" />
+                                    <input type="text" placeholder="请输入地址" class="form-control" id="editUserAddress" name="userAddress" />
                                 </div>
                                 <div class="form-group">
                                     <label>QQ:</label>
-                                    <input type="text" placeholder="请输入QQ" class="form-control" id="edit_qqOpenId" name="qqOpenId" />
+                                    <input type="text" placeholder="请输入QQ" class="form-control" id="editQqOpenId" name="qqOpenId" />
                                 </div>
                                 <div class="form-group">
                                     <label>微信:</label>
-                                    <input type="text" placeholder="请输入微信" class="form-control" id="edit_wechatOpenId" name="wechatOpenId" />
+                                    <input type="text" placeholder="请输入微信" class="form-control" id="editWechatOpenId" name="wechatOpenId" />
                                 </div>
                                 <div class="form-group">
                                     <label>微博:</label>
-                                    <input type="text" placeholder="请输入微博" class="form-control" id="edit_weiboOpenId" name="weiboOpenId" />
+                                    <input type="text" placeholder="请输入微博" class="form-control" id="editWeiboOpenId" name="weiboOpenId" />
                                 </div>
                                 <div class="form-group">
                                     <label>描述:</label>
-                                    <input type="text" placeholder="请输入描述" class="form-control" id="edit_userDes" name="userDes" />
+                                    <input type="text" placeholder="请输入描述" class="form-control" id="editUserDes" name="userDes" />
                                 </div>
                                 <div class="form-group">
                                     <label>所属公司:</label>
-                                    <select class="form-control m-b" id="edit_companyId" name="companyId">
+                                    <select class="form-control m-b" id="editCompanyId" name="companyId">
 		                        		<option value="">请选择</option>
 									</select>
                                 </div>
                                 <div class="form-group">
                                     <label>基本工资:</label>
-                                    <input type="text" placeholder="请输入基本工资" class="form-control" id="edit_userSalary" name="userSalary" />
+                                    <input type="text" placeholder="请输入基本工资" class="form-control" id="editUserSalary" name="userSalary" />
                                 </div>
                                 <div class="form-group">
                                     <label>状态:</label>
-                                    <select class="form-control m-b" id="edit_userStatus" name="userStatus">
+                                    <select class="form-control m-b" id="editUserStatus" name="userStatus">
 										<option value="Y">启用</option>
-										<option value="N">停用</option>
+										<option value="N">禁用</option>
 									</select>
                                 </div>
                                 <div>
@@ -326,18 +325,16 @@ String path = request.getContextPath();
     <script src="hplus/js/plugins/layer/laydate/laydate.js"></script>
     <script src="hplus/js/plugins/validate/jquery.validate.min.js"></script>
     <script src="hplus/js/plugins/validate/messages_zh.min.js"></script>
-	
-	<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
     
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/user/user.js"></script>
     <script type="text/javascript" src="js/user/user.validate.js"></script>
+    <script type="text/javascript" src="js/user/user.tree.js"></script>
     
     <!-- ztree -->
     <script type="text/javascript" src="js/ztree/jquery.ztree.core.js"></script>
     <script type="text/javascript" src="js/ztree/jquery.ztree.excheck.js"></script>
     <script type="text/javascript" src="js/ztree/jquery.ztree.exedit.js"></script>
     
-    <script type="text/javascript" src="js/user/user.tree.js"></script>
 </body>
 </html>

@@ -28,13 +28,10 @@ public class UserServiceImpl implements UserService {
 
 	@Resource
 	private UserMapper userMapper;
-	
 	@Resource
 	private RoleMapper roleMapper;
-	
 	@Resource
 	private UserRoleMapper userRoleMapper;
-	
 	@Resource
 	private PermissionMapper permissionMapper;
 
@@ -46,13 +43,12 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 			return AutoResult.error("添加失败");
 		}
-		return AutoResult.ok();
+		return AutoResult.success();
 	}
 	
 	@Override
 	public AutoResult delete(String[] ids) {
 		User user = null;
-		
 		for (String id : ids) {
 			user = new User();
 			user.setUserId(id);
@@ -63,8 +59,7 @@ public class UserServiceImpl implements UserService {
 				return AutoResult.error("删除失败");
 			}
 		}
-		
-		return AutoResult.ok();
+		return AutoResult.success();
 	}
 
 	@Override
@@ -75,7 +70,7 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 			return AutoResult.error("修改失败");
 		}
-		return AutoResult.ok();
+		return AutoResult.success();
 	}
 
 	@Override
@@ -96,24 +91,20 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 			return null;
 		}
-		
 		result.setPage(t.getPage());
 		result.setRecords(count);
 		result.setRows(list);
 		result.setTotal(result.getTotal(t.getRows()));
-		
 		return result;
 	}
 
 	@Override
 	public User get(User t) {
-
 		try {
 			return userMapper.get(t);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
 
@@ -123,9 +114,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserByName(String username) {
 		User user = new User();
-
 		user.setUserPhone(username);
-
 		try {
 			return userMapper.get(user);
 		} catch (Exception e) {
@@ -154,24 +143,20 @@ public class UserServiceImpl implements UserService {
 	public List<AutoTree> getRolesById(String userId) {
 		// 所有角色
 		List<Role> roleList = null;
-		
 		try {
 			roleList = roleMapper.list(new Role());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-		
 		// 用户角色
 		List<Role> userRoleList = null;
-		
 		try {
 			userRoleList = roleMapper.getRolesByUserId(userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-		
 		List<AutoTree> autoTreeList = new ArrayList<>();
 		autoTreeList.add(new AutoTree("1", "", "所有角色", Boolean.FALSE, Boolean.TRUE));
 		// 将角色添加到tree中
@@ -189,7 +174,6 @@ public class UserServiceImpl implements UserService {
 			}
 			autoTreeList.add(autoTree);
 		}
-		
 		return autoTreeList;
 	}
 
@@ -207,7 +191,6 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 			return AutoResult.error("添加失败");
 		}
-		
 		// 为用户重新添加角色
 		UserRole userRole = null;
 		for (String id : ids) {
@@ -225,8 +208,7 @@ public class UserServiceImpl implements UserService {
 				return AutoResult.error("添加失败");
 			}
 		}
-		
-		return AutoResult.ok();
+		return AutoResult.success();
 	}
 
 	/**
@@ -234,7 +216,6 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public List<Permission> getPermissionsByUserId(String userId) {
-		
 		try {
 			return permissionMapper.getPermissionsByUserId(userId);
 		} catch (Exception e) {

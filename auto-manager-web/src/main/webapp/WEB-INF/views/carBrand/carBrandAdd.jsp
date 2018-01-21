@@ -3,7 +3,6 @@
 	String path = request.getContextPath();
 	ResourceBundle res = ResourceBundle.getBundle("config/oss");
 %>
-
 <!DOCTYPE HTML>
 <html>
 <head>
