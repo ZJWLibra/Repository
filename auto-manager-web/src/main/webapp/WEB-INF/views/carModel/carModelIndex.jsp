@@ -127,7 +127,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h3 class="m-t-none m-b">编辑用户</h3>
+                            <h3 class="m-t-none m-b">编辑车型</h3>
                             <form role="form" id="editForm">
                             	<input type="hidden" id="editModelId" name="modelId" />
                                 <div class="form-group">

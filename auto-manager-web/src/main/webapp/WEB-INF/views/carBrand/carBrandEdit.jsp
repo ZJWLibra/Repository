@@ -40,7 +40,7 @@
 		<div class="col-lg-12">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<h3 class="m-t-none m-b">新增品牌</h3>
+					<h3 class="m-t-none m-b">编辑品牌</h3>
 				</div>
 				<div class="ibox-content">
 					<button data-toggle="button" class="btn btn-primary user-update" type="button" onclick="window.history.go(-1);">返回</button>

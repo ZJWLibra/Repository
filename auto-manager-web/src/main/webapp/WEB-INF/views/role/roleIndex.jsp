@@ -151,7 +151,7 @@ String path = request.getContextPath();
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h3 class="m-t-none m-b">添加角色</h3>
+                            <h3 class="m-t-none m-b">授权</h3>
                             <input type="hidden" id="userId" />
                             <div class="content_wrap">
                             	<input type="hidden" id="roleId" />

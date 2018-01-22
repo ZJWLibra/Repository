@@ -78,7 +78,7 @@ $(function() {
 					// 关闭窗口
 					$("#insert-form").modal("hide");
 					// 重新加载数据
-					$("#role_table").jqGrid('setGridParam', {
+					$("#grid_table").jqGrid('setGridParam', {
 	    				url : "carModel/list",
 	    				page : 1
 	    			}).trigger("reloadGrid");

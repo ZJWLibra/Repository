@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jw.mapper.CarColorMapper">
+	<sql id="query_list">
+		<where>
+			<if test="colorName != null and colorName != ''">
+				and colorName like '%${colorName}%'
+			</if>
+			<if test="colorStatus != null and colorStatus != ''">
+				and colorStatus = #{colorStatus}
+			</if>
+		</where>
+	</sql>
+	<sql id="query_get">
+		<where>
+			<if test="colorId != null and colorId != ''">
+				and colorId = #{colorId}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="list" parameterType="CarColor" resultType="CarColor">
+		select * from t_car_color
+		<include refid="query_list"></include>
+		<include refid="com.jw.mapper.UserMapper.sort"></include>
+		<include refid="com.jw.mapper.UserMapper.page"></include>
+	</select>
+	
+	<select id="get" parameterType="CarColor" resultType="CarColor">
+		select * from t_car_color
+		<include refid="query_get"></include>
+	</select>
+	
+	<select id="count" parameterType="CarColor" resultType="java.lang.Long">
+		select count(*) from t_car_color
+		<include refid="query_list"></include>
+	</select>
+	
+	<insert id="insert" parameterType="CarColor">
+		insert into t_car_color (
+			colorId,
+			colorName,
+			colorRGB,
+			colorHex,
+			colorDes,
+			colorStatus
+		)
+		values (
+			UUID(),
+			#{colorName},
+			#{colorRGB},
+			#{colorHex},
+			#{colorDes},
+			#{colorStatus}
+		)
+	</insert>
+
+	<update id="update" parameterType="CarColor">
+		update t_car_color set colorName = #{colorName},
+			colorRGB = #{colorRGB},
+			colorHex = #{colorHex},
+			colorDes = #{colorDes},
+			colorStatus = #{colorStatus}
+			where colorId = #{colorId}
+	</update>
+	
+	<delete id="delete" parameterType="CarColor">
+		delete from t_car_color
+		<where>
+			<if test="colorId != null and colorId != ''">
+				and colorId = #{colorId}
+			</if>
+		</where>
+	</delete>
+
+</mapper>
