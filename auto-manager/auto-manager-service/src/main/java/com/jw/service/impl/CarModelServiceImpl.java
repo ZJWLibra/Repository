@@ -7,12 +7,12 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jw.bean.CarBrand;
+import com.jw.bean.CarModel;
 import com.jw.common.AutoResult;
 import com.jw.common.JqgridResult;
 import com.jw.mapper.CarBrandMapper;
 import com.jw.mapper.CarModelMapper;
-import com.jw.model.CarBrand;
-import com.jw.model.CarModel;
 import com.jw.service.CarModelService;
 
 @Service

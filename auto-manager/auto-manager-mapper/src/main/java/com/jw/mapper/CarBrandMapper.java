@@ -1,6 +1,6 @@
 package com.jw.mapper;
 
-import com.jw.model.CarBrand;
+import com.jw.bean.CarBrand;
 
 public interface CarBrandMapper extends BaseMapper<CarBrand> {
 

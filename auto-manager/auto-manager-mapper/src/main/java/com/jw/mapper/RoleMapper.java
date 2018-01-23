@@ -2,7 +2,7 @@ package com.jw.mapper;
 
 import java.util.List;
 
-import com.jw.model.Role;
+import com.jw.bean.Role;
 
 public interface RoleMapper extends BaseMapper<Role> {
 	

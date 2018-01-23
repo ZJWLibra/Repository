@@ -10,10 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jw.bean.User;
 import com.jw.common.AutoResult;
 import com.jw.common.AutoTree;
 import com.jw.common.JqgridResult;
-import com.jw.model.User;
 import com.jw.service.RoleService;
 import com.jw.service.UserService;
 import com.jw.shiro.realm.CustomRealm;

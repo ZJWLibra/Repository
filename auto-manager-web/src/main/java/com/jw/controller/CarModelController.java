@@ -9,10 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jw.bean.CarBrand;
+import com.jw.bean.CarModel;
 import com.jw.common.AutoResult;
 import com.jw.common.JqgridResult;
-import com.jw.model.CarBrand;
-import com.jw.model.CarModel;
 import com.jw.service.CarModelService;
 
 /**

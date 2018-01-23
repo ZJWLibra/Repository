@@ -2,10 +2,10 @@ package com.jw.service;
 
 import java.util.List;
 
+import com.jw.bean.Permission;
+import com.jw.bean.User;
 import com.jw.common.AutoResult;
 import com.jw.common.AutoTree;
-import com.jw.model.Permission;
-import com.jw.model.User;
 
 public interface UserService extends BaseService<User> {
 	

@@ -7,10 +7,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jw.bean.Company;
 import com.jw.common.AutoResult;
 import com.jw.common.JqgridResult;
 import com.jw.mapper.CompanyMapper;
-import com.jw.model.Company;
 import com.jw.service.CompanyService;
 
 @Service

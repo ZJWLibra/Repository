@@ -14,9 +14,9 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
-import com.jw.model.Permission;
-import com.jw.model.User;
-import com.jw.model.ext.UserExt;
+import com.jw.bean.Permission;
+import com.jw.bean.User;
+import com.jw.bean.ext.UserExt;
 import com.jw.service.UserService;
 
 public class CustomRealm extends AuthorizingRealm {

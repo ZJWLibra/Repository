@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jw.model.ext.UserExt;
+import com.jw.bean.ext.UserExt;
 
 @Controller
 public class LoginController {

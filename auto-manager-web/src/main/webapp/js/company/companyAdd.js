@@ -127,6 +127,8 @@ if (lng == null || lng == "") {
 	geolocation.getCurrentPosition(function(r) {
 		if (this.getStatus() == BMAP_STATUS_SUCCESS) {
 			map.panTo(r.point);
+			// 强制居中
+			map.panBy(375, 230);
 		} else {
 			alert('failed' + this.getStatus());
 		}
@@ -141,9 +143,10 @@ if (lng == null || lng == "") {
 	map.addOverlay(marker);
 	// 跳动的动画
 	marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+	// 强制居中
+	map.panBy(375, 230);
 }
-// 强制居中
-map.panBy(375, 230);
+
 // 开启鼠标滚轮缩放
 map.enableScrollWheelZoom(true);
 

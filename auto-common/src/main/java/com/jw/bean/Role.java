@@ -1,4 +1,4 @@
-package com.jw.model;
+package com.jw.bean;
 
 import java.io.Serializable;
 

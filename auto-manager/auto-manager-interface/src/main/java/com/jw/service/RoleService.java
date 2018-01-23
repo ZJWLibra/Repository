@@ -2,9 +2,9 @@ package com.jw.service;
 
 import java.util.List;
 
+import com.jw.bean.Role;
 import com.jw.common.AutoResult;
 import com.jw.common.AutoTree;
-import com.jw.model.Role;
 
 public interface RoleService extends BaseService<Role> {
 	

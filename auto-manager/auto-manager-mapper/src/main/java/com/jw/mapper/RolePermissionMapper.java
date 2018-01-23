@@ -1,6 +1,6 @@
 package com.jw.mapper;
 
-import com.jw.model.RolePermission;
+import com.jw.bean.RolePermission;
 
 public interface RolePermissionMapper extends BaseMapper<RolePermission> {
 	

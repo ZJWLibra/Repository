@@ -16,9 +16,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.aliyun.oss.OSSClient;
+import com.jw.bean.CarBrand;
 import com.jw.common.AutoResult;
 import com.jw.common.JqgridResult;
-import com.jw.model.CarBrand;
 import com.jw.service.CarBrandService;
 import com.jw.util.OSSUtil;
 

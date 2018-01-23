@@ -17,9 +17,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.aliyun.oss.OSSClient;
+import com.jw.bean.Company;
 import com.jw.common.AutoResult;
 import com.jw.common.JqgridResult;
-import com.jw.model.Company;
 import com.jw.service.CompanyService;
 import com.jw.util.DateUtil;
 import com.jw.util.OSSUtil;

@@ -9,6 +9,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jw.bean.Permission;
+import com.jw.bean.Role;
+import com.jw.bean.User;
+import com.jw.bean.UserRole;
 import com.jw.common.AutoResult;
 import com.jw.common.AutoTree;
 import com.jw.common.JqgridResult;
@@ -16,10 +20,6 @@ import com.jw.mapper.PermissionMapper;
 import com.jw.mapper.RoleMapper;
 import com.jw.mapper.UserMapper;
 import com.jw.mapper.UserRoleMapper;
-import com.jw.model.Permission;
-import com.jw.model.Role;
-import com.jw.model.User;
-import com.jw.model.UserRole;
 import com.jw.service.UserService;
 
 @Service

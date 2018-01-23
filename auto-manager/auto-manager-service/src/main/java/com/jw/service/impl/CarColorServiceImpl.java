@@ -7,10 +7,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jw.bean.CarColor;
 import com.jw.common.AutoResult;
 import com.jw.common.JqgridResult;
 import com.jw.mapper.CarColorMapper;
-import com.jw.model.CarColor;
 import com.jw.service.CarColorService;
 
 @Service

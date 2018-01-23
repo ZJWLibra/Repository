@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jw.bean.CarColor;
 import com.jw.common.AutoResult;
 import com.jw.common.JqgridResult;
-import com.jw.model.CarColor;
 import com.jw.service.CarColorService;
 
 @Controller
