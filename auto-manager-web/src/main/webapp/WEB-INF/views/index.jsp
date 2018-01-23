@@ -78,6 +78,7 @@ String path = request.getContextPath();
                                 <a class="J_menuItem" href="carBrand/toIndex" data-index="0">品牌管理</a>
                                 <a class="J_menuItem" href="carModel/toIndex" data-index="0">车型管理</a>
                                 <a class="J_menuItem" href="carColor/toIndex" data-index="0">颜色管理</a>
+                                <a class="J_menuItem" href="carPlate/toIndex" data-index="0">车牌管理</a>
                             </li>
                         </ul>
                     </li>

@@ -4,7 +4,7 @@ $(function() {
 		var ids = []; 
 		
 		// 获取勾选数据
-		$('input:checkbox[name=roleId]:checked').each(function(value) {
+		$("input:checkbox[name=roleId]:checked").each(function(value) {
 			ids.push($(this).val()); 
 		});
 		

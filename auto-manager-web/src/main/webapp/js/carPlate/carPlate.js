@@ -1,18 +1,20 @@
 $(function() {
-	var colNames = ["id", "角色名称", "角色描述", "状态" ];
-	var colModel = [{
-		name : "roleId",
-		index : "roleId",
+	var colNames = [ "id", "车牌名称", "车型描述", "状态" ];
+	var colModel = [ {
+		name : "plateId",
+		index : "plateId",
 		hidden : true
 	}, {
-		name : "roleName",
-		index : "roleName",
+		name : "plateName",
+		index : "plateName"
 	}, {
-		name : "roleDes",
-		index : "roleDes",
+		name : "plateDes",
+		index : "plateDes",
+		width : 200
 	}, {
-		name : "roleStatus",
-		index : "roleStatus",
+		name : "plateStatus",
+		index : "plateStatus",
+		width : 80,
 		formatter : function(value, options, rowData) {
 			if (value == "Y") {
 				return "启用";
@@ -21,22 +23,35 @@ $(function() {
 			}
 		}
 	} ];
-	
-	pageInit("grid_table", "角色列表", "role/list", colNames, colModel);
-	
+	// 初始化表格
+	pageInit("grid_table", "车牌列表", "carPlate/list", colNames, colModel);
+
 	// 多选框赋值
-	$("#grid_table").jqGrid("setGridParam",{ 
+	$("#grid_table").jqGrid("setGridParam", {
 		gridComplete : function() {
 			var rowIds = jQuery("#grid_table").jqGrid("getDataIDs");
-			
 			for (var i = 0; i < rowIds.length; i++) {
 				var curRowData = jQuery("#grid_table").jqGrid("getRowData", rowIds[i]);
 				var curChk = $("#jqg_grid_table_" + (i + 1));
-				curChk.attr("name", "roleId");
-				curChk.attr("value", curRowData.roleId);
+				curChk.attr("name", "plateId");
+				curChk.attr("value", curRowData.plateId);
 			}
 		}
-    })
+	});
+
+	// 查询
+	$(".select_form").click(function() {
+		var plateName = $("#selectPlateName").val();
+		var plateStatus = $("#selectPlateStatus").val();
+		$("#grid_table").jqGrid("setGridParam", {
+			url : "carPlate/list",
+			postData : {
+				"plateName" : plateName,
+				"plateStatus" : plateStatus
+			},
+			page : 1
+		}).trigger("reloadGrid");
+	});
 	
 	// 新增
 	$("#insert_submit").click(function() {
@@ -46,7 +61,7 @@ $(function() {
 		
 		$.ajax({
 			type : "POST",
-			url : "role/insert",
+			url : "carPlate/insert",
 			data : $("#insertForm").serialize(),
 			dataType : "JSON",
 			success : function(data) {
@@ -56,7 +71,7 @@ $(function() {
 					$("#insert-form").modal("hide");
 					// 重新加载数据
 					$("#grid_table").jqGrid("setGridParam", {
-	    				url : "role/list",
+	    				url : "carPlate/list",
 	    				page : 1
 	    			}).trigger("reloadGrid");
 					// 清空表单
@@ -67,13 +82,13 @@ $(function() {
 			}
 		});
 	});
-	
+
 	// 弹出修改表单
-	$(".role-update").click(function() {
+	$(".carPlate-update").click(function() {
 		var ids = []; 
 		
 		// 获取勾选数据
-		$("input:checkbox[name=roleId]:checked").each(function(value) {
+		$("input:checkbox[name=plateId]:checked").each(function(value) {
 			ids.push($(this).val()); 
 		});
 		
@@ -88,22 +103,21 @@ $(function() {
 		
 		$.ajax({
 			type : "POST",
-			url : "role/getById",
-			data : {"roleId" : ids[0]},
+			url : "carPlate/getById",
+			data : {"plateId" : ids[0]},
 			dataType : "JSON",
 			success : function(data) {
-				$("#editRoleId").val(data.roleId);
-				$("#editRoleName").val(data.roleName);
-				$("#editRoleDes").val(data.roleDes);
+				$("#editPlateId").val(data.plateId);
+				$("#editPlateName").val(data.plateName);
+				$("#editPlateDes").val(data.plateDes);
 				// 状态判断
-				$("#editRoleStatus").find("option[value='" + data.roleStatus + "']").attr("selected", true);
-
+				$("#editPlateStatus").find("option[value='" + data.plateStatus + "']").attr("selected", true);
 				$("#edit-form").modal("show");
 			}
 		});
 	});
 	
-	// 修改角色信息
+	// 修改车型
 	$("#edit_submit").click(function() {
 		if (!$("#editForm").valid()) {
 			return;
@@ -111,7 +125,7 @@ $(function() {
 		
 		$.ajax({
 			type : "POST",
-			url : "role/update",
+			url : "carPlate/update",
 			data : $("#editForm").serialize(),
 			dataType : "JSON",
 			success : function(data) {
@@ -121,7 +135,7 @@ $(function() {
 					$("#edit-form").modal("hide");
 					// 重新加载数据
 					$("#grid_table").jqGrid("setGridParam", {
-	    				url : "role/list",
+	    				url : "carPlate/list",
 	    				page : 1
 	    			}).trigger("reloadGrid");
 				} else {
@@ -130,5 +144,5 @@ $(function() {
 			}
 		});
 	});
-	
+
 });

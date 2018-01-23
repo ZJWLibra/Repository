@@ -1,5 +1,5 @@
 $(function() {
-	var colNames = [ "id", "车型名称", "车型描述", "所属品牌", "车型状态" ];
+	var colNames = [ "id", "车型名称", "车型描述", "所属品牌", "状态" ];
 	var colModel = [ {
 		name : "modelId",
 		index : "modelId",
@@ -33,7 +33,7 @@ $(function() {
 	pageInit("grid_table", "车型列表", "carModel/list", colNames, colModel);
 
 	// 多选框赋值
-	$("#grid_table").jqGrid('setGridParam', {
+	$("#grid_table").jqGrid("setGridParam", {
 		gridComplete : function() {
 			var rowIds = jQuery("#grid_table").jqGrid("getDataIDs");
 			for (var i = 0; i < rowIds.length; i++) {
@@ -50,7 +50,7 @@ $(function() {
 		var modelName = $("#selectModelName").val();
 		var brandId = $("#selectBrandId").val();
 		var modelStatus = $("#selectModelStatus").val();
-		$("#grid_table").jqGrid('setGridParam', {
+		$("#grid_table").jqGrid("setGridParam", {
 			url : "carModel/list",
 			postData : {
 				"modelName" : modelName,
@@ -78,7 +78,7 @@ $(function() {
 					// 关闭窗口
 					$("#insert-form").modal("hide");
 					// 重新加载数据
-					$("#grid_table").jqGrid('setGridParam', {
+					$("#grid_table").jqGrid("setGridParam", {
 	    				url : "carModel/list",
 	    				page : 1
 	    			}).trigger("reloadGrid");
@@ -96,7 +96,7 @@ $(function() {
 		var ids = []; 
 		
 		// 获取勾选数据
-		$('input:checkbox[name=modelId]:checked').each(function(value) {
+		$("input:checkbox[name=modelId]:checked").each(function(value) {
 			ids.push($(this).val()); 
 		});
 		
@@ -145,7 +145,7 @@ $(function() {
 					// 关闭窗口
 					$("#edit-form").modal("hide");
 					// 重新加载数据
-					$("#grid_table").jqGrid('setGridParam', {
+					$("#grid_table").jqGrid("setGridParam", {
 	    				url : "carModel/list",
 	    				page : 1
 	    			}).trigger("reloadGrid");

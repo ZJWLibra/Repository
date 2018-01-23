@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jw.mapper.CarPlateMapper">
+	<sql id="query_list">
+		<where>
+			<if test="plateName != null and plateName != ''">
+				and plateName like '%${plateName}%'
+			</if>
+			<if test="plateStatus != null and plateStatus != ''">
+				and plateStatus = #{plateStatus}
+			</if>
+		</where>
+	</sql>
+	<sql id="query_get">
+		<where>
+			<if test="plateId != null and plateId != ''">
+				and plateId = #{plateId}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="list" parameterType="CarPlate" resultType="CarPlate">
+		select * from t_car_plate
+		<include refid="query_list"></include>
+		<include refid="com.jw.mapper.UserMapper.sort"></include>
+		<include refid="com.jw.mapper.UserMapper.page"></include>
+	</select>
+	
+	<select id="get" parameterType="CarPlate" resultType="CarPlate">
+		select * from t_car_plate
+		<include refid="query_get"></include>
+	</select>
+	
+	<select id="count" parameterType="CarPlate" resultType="java.lang.Long">
+		select count(*) from t_car_plate
+		<include refid="query_list"></include>
+	</select>
+	
+	<insert id="insert" parameterType="CarPlate">
+		insert into t_car_plate (
+			plateId,
+			plateName,
+			plateDes,
+			plateStatus
+		)
+		values (
+			UUID(),
+			#{plateName},
+			#{plateDes},
+			#{plateStatus}
+		)
+	</insert>
+
+	<update id="update" parameterType="CarPlate">
+		update t_car_plate set plateName = #{plateName},
+			plateDes = #{plateDes},
+			plateStatus = #{plateStatus}
+			where plateId = #{plateId}
+	</update>
+	
+	<delete id="delete" parameterType="CarPlate">
+		delete from t_car_plate
+		<where>
+			<if test="colorId != null and colorId != ''">
+				and plateId = #{plateId}
+			</if>
+		</where>
+	</delete>
+
+</mapper>

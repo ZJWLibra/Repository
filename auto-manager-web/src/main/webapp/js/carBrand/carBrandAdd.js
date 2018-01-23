@@ -52,15 +52,15 @@ $(function() {
 	
 	'use strict';
 	// 初始化
-	var $image = $('#image');
+	var $image = $("#image");
 	$image.cropper({
-		aspectRatio : '1',
+		aspectRatio : "1",
 		autoCropArea : 0.8,
-		preview : '.up-pre-after',
+		preview : ".up-pre-after",
 	});
 
 	// 上传图片
-	var $inputImage = $('#inputImage');
+	var $inputImage = $("#inputImage");
 	var URL = window.URL || window.webkitURL;
 	var blobURL;
 	
@@ -76,7 +76,7 @@ $(function() {
 					$image.one('built.cropper', function() {
 						// 当加载完成时撤消
 						URL.revokeObjectURL(blobURL);
-					}).cropper('reset').cropper('replace', blobURL);
+					}).cropper("reset").cropper("replace", blobURL);
 					
 					var option = {
 						type : "POST",
@@ -95,19 +95,19 @@ $(function() {
 				
 					$("#uploadForm").ajaxSubmit(option);
 				} else {
-					window.alert('Please choose an image file.');
+					window.alert("Please choose an image file.");
 				}
 			}
 		});
 	} else {
-		$inputImage.prop('disabled', true).parent().addClass('disabled');
+		$inputImage.prop("disabled", true).parent().addClass("disabled");
 	}
 });
 
 function rotateimgright() {
-	$("#image").cropper('rotate', 90);
+	$("#image").cropper("rotate", 90);
 }
 
 function rotateimgleft() {
-	$("#image").cropper('rotate', -90);
+	$("#image").cropper("rotate", -90);
 }

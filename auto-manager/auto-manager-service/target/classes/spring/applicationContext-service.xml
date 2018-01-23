@@ -34,4 +34,5 @@
 	<dubbo:service interface="com.jw.service.CompanyService" ref="companyServiceImpl" />
 	<dubbo:service interface="com.jw.service.CarModelService" ref="carModelServiceImpl" />
 	<dubbo:service interface="com.jw.service.CarColorService" ref="carColorServiceImpl" />
+	<dubbo:service interface="com.jw.service.CarPlateService" ref="carPlateServiceImpl" />
 </beans>

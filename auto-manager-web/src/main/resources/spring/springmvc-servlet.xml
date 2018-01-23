@@ -62,4 +62,5 @@
 	<dubbo:reference interface="com.jw.service.CompanyService" id="companyService" timeout="300000" />
 	<dubbo:reference interface="com.jw.service.CarModelService" id="carModelService" timeout="300000" />
 	<dubbo:reference interface="com.jw.service.CarColorService" id="carColorService" timeout="300000" />
+	<dubbo:reference interface="com.jw.service.CarPlateService" id="carPlateService" timeout="300000" />
 </beans>

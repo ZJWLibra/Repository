@@ -56,7 +56,7 @@ $(function() {
 	pageInit("grid_table", "用户列表", "user/list", colNames, colModel);
 
 	// 多选框赋值
-	$("#grid_table").jqGrid('setGridParam', {
+	$("#grid_table").jqGrid("setGridParam", {
 		gridComplete : function() {
 			var rowIds = jQuery("#grid_table").jqGrid("getDataIDs");
 
@@ -84,7 +84,7 @@ $(function() {
 			var ids = [];
 
 			// 获取勾选数据
-			$('input:checkbox[name=userId]:checked').each(function(value) {
+			$("input:checkbox[name=userId]:checked").each(function(value) {
 				ids.push($(this).val());
 			});
 
@@ -107,7 +107,7 @@ $(function() {
 						swal("成功", "数据已删除", "success");
 
 						// 重新加载数据
-						$("#user_table").jqGrid('setGridParam', {
+						$("#user_table").jqGrid("setGridParam", {
 							datatype : "json",
 							url : "user/list"
 						}).trigger("reloadGrid");
@@ -124,7 +124,7 @@ $(function() {
 	$(".form_select").click(function() {
 		var userGender = $("#selectUserGender").val();
 		var userStatus = $("#selectUserStatus").val();
-		$("#grid_table").jqGrid('setGridParam', {
+		$("#grid_table").jqGrid("setGridParam", {
 			url : "user/list",
 			postData : {
 				"userGender" : userGender,
@@ -151,7 +151,7 @@ $(function() {
 					// 关闭窗口
 					$("#insert-form").modal("hide");
 					// 重新加载数据
-					$("#grid_table").jqGrid('setGridParam', {
+					$("#grid_table").jqGrid("setGridParam", {
 						url : "user/list",
 						page : 1
 					}).trigger("reloadGrid");
@@ -169,7 +169,7 @@ $(function() {
 		var ids = [];
 
 		// 获取勾选数据
-		$('input:checkbox[name=userId]:checked').each(function(value) {
+		$("input:checkbox[name=userId]:checked").each(function(value) {
 			ids.push($(this).val());
 		});
 
@@ -243,7 +243,7 @@ $(function() {
 					// 关闭窗口
 					$("#edit-form").modal("hide");
 					// 重新加载数据
-					$("#grid_table").jqGrid('setGridParam', {
+					$("#grid_table").jqGrid("setGridParam", {
 						url : "user/list",
 						page : 1
 					}).trigger("reloadGrid");

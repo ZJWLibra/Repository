@@ -38,7 +38,7 @@ $(function() {
 	pageInit("grid_table", "颜色列表", "carColor/list", colNames, colModel);
 
 	// 多选框赋值
-	$("#grid_table").jqGrid('setGridParam', {
+	$("#grid_table").jqGrid("setGridParam", {
 		gridComplete : function() {
 			var rowIds = jQuery("#grid_table").jqGrid("getDataIDs");
 			for (var i = 0; i < rowIds.length; i++) {
@@ -54,7 +54,7 @@ $(function() {
 	$(".select_form").click(function() {
 		var colorName = $("#selectColorName").val();
 		var colorStatus = $("#selectColorStatus").val();
-		$("#grid_table").jqGrid('setGridParam', {
+		$("#grid_table").jqGrid("setGridParam", {
 			url : "carColor/list",
 			postData : {
 				"colorName" : colorName,
@@ -81,7 +81,7 @@ $(function() {
 					// 关闭窗口
 					$("#insert-form").modal("hide");
 					// 重新加载数据
-					$("#grid_table").jqGrid('setGridParam', {
+					$("#grid_table").jqGrid("setGridParam", {
 	    				url : "carColor/list",
 	    				page : 1
 	    			}).trigger("reloadGrid");
@@ -99,7 +99,7 @@ $(function() {
 		var ids = []; 
 		
 		// 获取勾选数据
-		$('input:checkbox[name=colorId]:checked').each(function(value) {
+		$("input:checkbox[name=colorId]:checked").each(function(value) {
 			ids.push($(this).val()); 
 		});
 		
@@ -149,7 +149,7 @@ $(function() {
 					// 关闭窗口
 					$("#edit-form").modal("hide");
 					// 重新加载数据
-					$("#grid_table").jqGrid('setGridParam', {
+					$("#grid_table").jqGrid("setGridParam", {
 	    				url : "carColor/list",
 	    				page : 1
 	    			}).trigger("reloadGrid");

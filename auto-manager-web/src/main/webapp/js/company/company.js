@@ -1,5 +1,5 @@
 $(function() {
-	var colNames = [ "id", "公司名称", "公司地址", "公司联系方式", "公司负责人", "公司负责人电话", "公司官网", "公司logo", "公司成立时间", "公司规模", "公司状态" ];
+	var colNames = [ "id", "公司名称", "公司地址", "公司联系方式", "公司负责人", "公司负责人电话", "公司官网", "公司logo", "公司成立时间", "公司规模", "状态" ];
 	var colModel = [ {
 		name : "companyId",
 		index : "companyId",
@@ -55,7 +55,7 @@ $(function() {
 	pageInit("grid_table", "公司列表", "company/list", colNames, colModel);
 
 	// 多选框赋值
-	$("#grid_table").jqGrid('setGridParam', {
+	$("#grid_table").jqGrid("setGridParam", {
 		gridComplete : function() {
 			var rowIds = jQuery("#grid_table").jqGrid("getDataIDs");
 			for (var i = 0; i < rowIds.length; i++) {
@@ -71,7 +71,7 @@ $(function() {
 	$(".select_form").click(function() {
 		var companyName = $("#selectCompanyName").val();
 		var companyStatus = $("#selectCompanyStatus").val();
-		$("#grid_table").jqGrid('setGridParam', {
+		$("#grid_table").jqGrid("setGridParam", {
 			url : "company/list",
 			postData : {
 				"companyName" : companyName,
@@ -85,7 +85,7 @@ $(function() {
 	$(".company-update").click(function() {
 		var ids = [];
 		// 获取勾选数据
-		$('input:checkbox[name=companyId]:checked').each(function(value) {
+		$("input:checkbox[name=companyId]:checked").each(function(value) {
 			ids.push($(this).val());
 		});
 		// 判断是否有勾选

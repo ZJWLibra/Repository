@@ -33,7 +33,7 @@ $(function() {
 	pageInit("grid_table", "品牌列表", "carBrand/list", colNames, colModel);
 	
 	// 多选框赋值
-	$("#grid_table").jqGrid('setGridParam',{ 
+	$("#grid_table").jqGrid("setGridParam",{ 
 		gridComplete : function() {
 			var rowIds = jQuery("#grid_table").jqGrid("getDataIDs");
 			for (var i = 0; i < rowIds.length; i++) {
@@ -49,7 +49,7 @@ $(function() {
 	$(".select_form").click(function() {
 		var brandName = $("#selectBrandName").val();
 		var brandStatus = $("#selectBrandStatus").val();
-		$("#grid_table").jqGrid('setGridParam', {
+		$("#grid_table").jqGrid("setGridParam", {
 			url : "carBrand/list",
 			postData : {
 				"brandName" : brandName,
@@ -64,7 +64,7 @@ $(function() {
 		var ids = []; 
 		
 		// 获取勾选数据
-		$('input:checkbox[name=carBrandId]:checked').each(function(value) {
+		$("input:checkbox[name=carBrandId]:checked").each(function(value) {
 			ids.push($(this).val()); 
 		});
 		
