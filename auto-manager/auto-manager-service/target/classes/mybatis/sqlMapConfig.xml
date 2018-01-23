@@ -6,7 +6,7 @@
 	<!-- 定义别名 -->
 	<typeAliases>
 		<!-- 扫描包下的所有类，默认别名是类名 -->
-		<package name="com.jw.model"></package>
+		<package name="com.jw.bean"></package>
 	</typeAliases>
 
 </configuration>
