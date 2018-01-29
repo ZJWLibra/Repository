@@ -1,18 +1,17 @@
 package com.jw.service;
 
-import com.jw.common.AutoResult;
 import com.jw.common.JqgridResult;
 
 public interface BaseService<T> {
 	
-	AutoResult insert(T t);
+	void insert(T t) throws Exception;
 	
-	AutoResult delete(String[] ids);
+	void delete(String[] ids) throws Exception;
 	
-	AutoResult update(T t);
+	void update(T t) throws Exception;
 	
-	JqgridResult<T> list(T t);
+	JqgridResult<T> list(T t) throws Exception;
 	
-	T get(T t);
+	T get(T t) throws Exception;
 	
 }

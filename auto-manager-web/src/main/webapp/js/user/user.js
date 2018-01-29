@@ -105,9 +105,8 @@ $(function() {
 				success : function(data) {
 					if (data.status == 200) {
 						swal("成功", "数据已删除", "success");
-
 						// 重新加载数据
-						$("#user_table").jqGrid("setGridParam", {
+						$("#grid_table").jqGrid("setGridParam", {
 							datatype : "json",
 							url : "user/list"
 						}).trigger("reloadGrid");

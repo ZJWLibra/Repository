@@ -53,6 +53,14 @@
 		<include refid="query_list"></include>
 	</select>
 	
+	<select id="listUserByRoleName" parameterType="java.lang.String" resultType="User">
+		select * from t_user where userId in (
+			select userId from t_user_role where roleId in (
+				select roleId from t_role where roleName = #{roleName}
+			)
+		)
+	</select>
+	
 	<insert id="insert" parameterType="User">
 		insert into t_user (
 			userId,

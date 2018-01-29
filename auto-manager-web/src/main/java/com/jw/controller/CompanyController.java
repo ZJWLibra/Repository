@@ -33,7 +33,6 @@ import com.jw.util.OSSUtil;
 @Controller
 @RequestMapping("/company")
 public class CompanyController {
-	
 	@Resource
 	private CompanyService companyService;
 	
@@ -49,14 +48,18 @@ public class CompanyController {
 	
 	@RequestMapping("/list")
 	public @ResponseBody JqgridResult<Company> list(Company company) {
-		JqgridResult<Company> result = companyService.list(company);
-		
+		JqgridResult<Company> result;
+		try {
+			result = companyService.list(company);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		return result;
 	}
 	
 	@RequestMapping("/toAdd")
 	public String toAdd() {
-		
 		return "company/companyAdd";
 	}
 	
@@ -65,11 +68,9 @@ public class CompanyController {
 		MultipartHttpServletRequest mh = (MultipartHttpServletRequest) request;
 		// 根据文件名称获取文件对象
 		CommonsMultipartFile cm = (CommonsMultipartFile) mh.getFile(fileName);
-		
 		// 获取文件扩展名
 		String originalFilename = cm.getOriginalFilename();
 		String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-		
 		// 获取文件新名称
 		String newFileName = OSSUtil.getNewFileName() + suffix;
 		String key = OSS_COMPANY + newFileName;
@@ -83,7 +84,6 @@ public class CompanyController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		// 文件的相对路径
 		String relativePath = OSS_COMPANY + newFileName;
 		String jsonStr = "{\"relativePath\" : \"" + relativePath + "\"}";
@@ -97,15 +97,25 @@ public class CompanyController {
 			company.setCompanyOpenDate(companyOpenDate);
 		}
 		company.setCreateTime(new Date());
-		AutoResult result = companyService.insert(company);
-		return result;
+		try {
+			companyService.insert(company);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AutoResult.error("新增失败");
+		}
+		return AutoResult.success();
 	}
 	
 	@RequestMapping("/toEdit/{id}")
 	public String toEdit(@PathVariable String id, Model model) {
 		Company company = new Company();
 		company.setCompanyId(id);
-		company = companyService.get(company);
+		try {
+			company = companyService.get(company);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error/500";
+		}
 		model.addAttribute("company", company);
 		return "company/companyEdit";
 	}
@@ -115,9 +125,13 @@ public class CompanyController {
 		if (strCompanyOpenDate != null && !strCompanyOpenDate.equals("")) {
 			company.setCompanyOpenDate(DateUtil.stringToDate(strCompanyOpenDate, "yyyy-MM-dd"));
 		}
-		AutoResult result = companyService.update(company);
-		
-		return result;
+		try {
+			companyService.update(company);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AutoResult.error("修改失败");
+		}
+		return AutoResult.success();
 	}
 	
 }

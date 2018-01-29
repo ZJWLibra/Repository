@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jw.bean.ext.UserExt;
+import com.jw.util.ShiroUtil;
 
 @Controller
 public class LoginController {
@@ -51,13 +52,7 @@ public class LoginController {
 	 */
 	@RequestMapping("/toIndex")
 	public String toIndex(Model model) {
-		Subject subject = SecurityUtils.getSubject();
-
-		// 获取身份信息
-		UserExt userExt = (UserExt) subject.getPrincipal();
-
-		model.addAttribute("user", userExt);
-
+		model.addAttribute("user", ShiroUtil.getUser());
 		return "index";
 	}
 }

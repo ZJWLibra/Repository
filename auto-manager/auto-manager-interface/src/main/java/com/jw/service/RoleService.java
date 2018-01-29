@@ -13,7 +13,7 @@ public interface RoleService extends BaseService<Role> {
 	 * @param roleId 角色id
 	 * @return 权限tree
 	 */
-	List<AutoTree> getPermissionsByRoleId(String roleId);
+	List<AutoTree> getPermissionsByRoleId(String roleId) throws Exception;
 	
 	/**
 	 * 授权
@@ -21,5 +21,5 @@ public interface RoleService extends BaseService<Role> {
 	 * @param roleId 角色id
 	 * @return 返回结果
 	 */
-	AutoResult insertPermission(String[] ids, String roleId);
+	void insertPermission(String[] ids, String roleId) throws Exception;
 }

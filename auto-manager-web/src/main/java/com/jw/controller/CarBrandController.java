@@ -30,7 +30,6 @@ import com.jw.util.OSSUtil;
 @Controller
 @RequestMapping("/carBrand")
 public class CarBrandController {
-	
 	@Resource
 	private CarBrandService carBrandService;
 	
@@ -46,8 +45,13 @@ public class CarBrandController {
 	
 	@RequestMapping("/list")
 	public @ResponseBody JqgridResult<CarBrand> list(CarBrand carBrand) {
-		JqgridResult<CarBrand> result = carBrandService.list(carBrand);
-		
+		JqgridResult<CarBrand> result;
+		try {
+			result = carBrandService.list(carBrand);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		return result;
 	}
 	
@@ -61,11 +65,9 @@ public class CarBrandController {
 		MultipartHttpServletRequest mh = (MultipartHttpServletRequest) request;
 		// 根据文件名称获取文件对象
 		CommonsMultipartFile cm = (CommonsMultipartFile) mh.getFile(fileName);
-		
 		// 获取文件扩展名
 		String originalFilename = cm.getOriginalFilename();
 		String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-		
 		// 获取文件新名称
 		String newFileName = OSSUtil.getNewFileName() + suffix;
 		String key = OSS_CAR_BRAND + newFileName;
@@ -88,26 +90,38 @@ public class CarBrandController {
 	
 	@RequestMapping("/insert")
 	public @ResponseBody AutoResult insert(CarBrand carBrand) {
-		AutoResult result = carBrandService.insert(carBrand);
-		
-		return result;
+		try {
+			carBrandService.insert(carBrand);
+		} catch (Exception e) {
+			e.printStackTrace();
+			AutoResult.error("新增失败");
+		}
+		return AutoResult.success();
 	}
 	
 	@RequestMapping("/toEdit/{brandId}")
 	public String toEdit(@PathVariable String brandId, Model model) {
 		CarBrand carBrand = new CarBrand();
 		carBrand.setBrandId(brandId);
-		carBrand = carBrandService.get(carBrand);
-		
+		try {
+			carBrand = carBrandService.get(carBrand);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		model.addAttribute("carBrand", carBrand);
 		return "carBrand/carBrandEdit";
 	}
 	
 	@RequestMapping("/update")
 	public @ResponseBody AutoResult update(CarBrand carBrand) {
-		AutoResult result = carBrandService.update(carBrand);
-		
-		return result;
+		try {
+			carBrandService.update(carBrand);
+		} catch (Exception e) {
+			e.printStackTrace();
+			AutoResult.error("修改失败");
+		}
+		return AutoResult.success();
 	}
 	
 }

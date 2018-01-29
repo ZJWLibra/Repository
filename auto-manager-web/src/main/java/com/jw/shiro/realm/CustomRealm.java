@@ -20,7 +20,6 @@ import com.jw.bean.ext.UserExt;
 import com.jw.service.UserService;
 
 public class CustomRealm extends AuthorizingRealm {
-	
 	private UserService userService;
 
 	@Override
@@ -33,7 +32,12 @@ public class CustomRealm extends AuthorizingRealm {
 		// 取出身份信息
 		String username = (String) token.getPrincipal();
 
-		User user = userService.getUserByName(username);
+		User user = null;
+		try {
+			user = userService.getUserByName(username);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		if (user == null) {
 			return null;
@@ -59,7 +63,13 @@ public class CustomRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		UserExt userExt = (UserExt) principals.getPrimaryPrincipal();
 
-		List<Permission> permissionList = userService.getPermissionsByUserId(userExt.getUserId());
+		List<Permission> permissionList;
+		try {
+			permissionList = userService.getPermissionsByUserId(userExt.getUserId());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 
 		// 权限代码字符串
 		List<String> percodeList = new ArrayList<>();

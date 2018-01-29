@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jw.bean.CarColor;
-import com.jw.common.AutoResult;
 import com.jw.common.JqgridResult;
 import com.jw.mapper.CarColorMapper;
 import com.jw.service.CarColorService;
@@ -16,48 +15,28 @@ import com.jw.service.CarColorService;
 @Service
 @Transactional
 public class CarColorServiceImpl implements CarColorService {
-	
 	@Resource
 	private CarColorMapper carColorMapper;
 
 	@Override
-	public AutoResult insert(CarColor t) {
-		try {
-			carColorMapper.insert(t);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return AutoResult.error("新增失败");
-		}
-		return AutoResult.success();
+	public void insert(CarColor t) throws Exception {
+		carColorMapper.insert(t);
 	}
 
 	@Override
-	public AutoResult delete(String[] ids) {
-		return null;
+	public void delete(String[] ids) throws Exception {
+		
 	}
 
 	@Override
-	public AutoResult update(CarColor t) {
-		try {
-			carColorMapper.update(t);
-		} catch (Exception e) {
-			e.printStackTrace();
-			AutoResult.error("修改失败");
-		}
-		return AutoResult.success();
+	public void update(CarColor t) throws Exception {
+		carColorMapper.update(t);
 	}
 
 	@Override
-	public JqgridResult<CarColor> list(CarColor t) {
-		List<CarColor> list;
-		Long count;
-		try {
-			count = carColorMapper.count(t);
-			list = carColorMapper.list(t);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+	public JqgridResult<CarColor> list(CarColor t) throws Exception {
+		List<CarColor> list = carColorMapper.list(t);
+		Long count = carColorMapper.count(t);
 		JqgridResult<CarColor> result = new JqgridResult<CarColor>();
 		result.setPage(t.getPage());
 		result.setRecords(count);
@@ -67,13 +46,8 @@ public class CarColorServiceImpl implements CarColorService {
 	}
 
 	@Override
-	public CarColor get(CarColor t) {
-		try {
-			return carColorMapper.get(t);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+	public CarColor get(CarColor t) throws Exception {
+		return carColorMapper.get(t);
 	}
 
 }

@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jw.bean.Permission;
 import com.jw.bean.Role;
 import com.jw.bean.RolePermission;
-import com.jw.common.AutoResult;
 import com.jw.common.AutoTree;
 import com.jw.common.JqgridResult;
 import com.jw.mapper.PermissionMapper;
@@ -23,7 +22,6 @@ import com.jw.service.RoleService;
 @Service
 @Transactional
 public class RoleServiceImpl implements RoleService {
-
 	@Resource
 	private RoleMapper roleMapper;
 	@Resource
@@ -32,55 +30,30 @@ public class RoleServiceImpl implements RoleService {
 	private RolePermissionMapper rolePermissionMapper;
 	
 	@Override
-	public AutoResult insert(Role t) {
-		try {
-			roleMapper.insert(t);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return AutoResult.error("添加失败");
-		}
-		return AutoResult.success();
+	public void insert(Role t) throws Exception {
+		roleMapper.insert(t);
 	}
 
 	@Override
-	public AutoResult delete(String[] ids) {
+	public void delete(String[] ids) throws Exception {
 		Role role = null;
 		for (String id : ids) {
 			role = new Role();
 			role.setRoleId(id);
-			try {
-				roleMapper.delete(role);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return AutoResult.error("删除失败");
-			}
+			roleMapper.delete(role);
 		}
-		return AutoResult.success();
 	}
 
 	@Override
-	public AutoResult update(Role t) {
-		try {
-			roleMapper.update(t);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return AutoResult.error("修改失败");
-		}
-		return AutoResult.success();
+	public void update(Role t) throws Exception {
+		roleMapper.update(t);
 	}
 
 	@Override
-	public JqgridResult<Role> list(Role t) {
+	public JqgridResult<Role> list(Role t) throws Exception {
+		Long count = roleMapper.count(t);
+		List<Role> list = roleMapper.list(t);
 		JqgridResult<Role> result = new JqgridResult<>();
-		Long count;
-		List<Role> list;
-		try {
-			count = roleMapper.count(t);
-			list = roleMapper.list(t);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
 		result.setPage(t.getPage());
 		result.setRecords(count);
 		result.setRows(list);
@@ -89,35 +62,19 @@ public class RoleServiceImpl implements RoleService {
 	}
 	
 	@Override
-	public Role get(Role t) {
-		try {
-			return roleMapper.get(t);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+	public Role get(Role t) throws Exception {
+		return roleMapper.get(t);
 	}
 
 	/**
 	 * 根据角色id查询对应权限
 	 */
 	@Override
-	public List<AutoTree> getPermissionsByRoleId(String roleId) {
+	public List<AutoTree> getPermissionsByRoleId(String roleId) throws Exception {
 		// 所有权限
-		List<Permission> permissionList = null;
-		try {
-			permissionList = permissionMapper.list(new Permission());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+		List<Permission> permissionList = permissionMapper.list(new Permission());
 		// 角色拥有的权限
-		List<Permission> rolePermissionList = null;
-		try {
-			rolePermissionList = permissionMapper.getPermissionsByRoleId(roleId);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		List<Permission> rolePermissionList = permissionMapper.getPermissionsByRoleId(roleId);
 		List<AutoTree> autoTreeList = new ArrayList<>();
 		AutoTree autoTree = null;
 		if (permissionList != null && permissionList.size() > 0) {
@@ -142,16 +99,11 @@ public class RoleServiceImpl implements RoleService {
 	 * 授权
 	 */
 	@Override
-	public AutoResult insertPermission(String[] ids, String roleId) {
+	public void insertPermission(String[] ids, String roleId) throws Exception {
 		// 删除原有权限
 		RolePermission rp = new RolePermission();
 		rp.setRoleId(roleId);
-		try {
-			rolePermissionMapper.delete(rp);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return AutoResult.error("授权失败");
-		}
+		rolePermissionMapper.delete(rp);
 		// 授权
 		RolePermission rolePermission = null;
 		for (String id : ids) {
@@ -159,14 +111,8 @@ public class RoleServiceImpl implements RoleService {
 			rolePermission.setPermissionId(id);
 			rolePermission.setRoleId(roleId);
 			rolePermission.setRpCreatedTime(new Date());
-			try {
-				rolePermissionMapper.insert(rolePermission);
-			} catch (Exception e) {
-				e.printStackTrace();
-				AutoResult.error("授权失败");
-			}
+			rolePermissionMapper.insert(rolePermission);
 		}
-		return AutoResult.success();
 	}
 
 }

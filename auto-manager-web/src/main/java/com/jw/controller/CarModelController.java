@@ -24,41 +24,67 @@ import com.jw.service.CarModelService;
 @Controller
 @RequestMapping("/carModel")
 public class CarModelController {
-	
 	@Resource
 	private CarModelService carModelService;
 	
 	@RequestMapping("/toIndex")
 	public String toIndex(Model model) {
-		List<CarBrand> carBrandList = carModelService.listCarBrand();
+		List<CarBrand> carBrandList;
+		try {
+			carBrandList = carModelService.listCarBrand();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error/500";
+		}
 		model.addAttribute("carBrandList", carBrandList);
 		return "carModel/carModelIndex";
 	}
 	
 	@RequestMapping("/list")
 	public @ResponseBody JqgridResult<CarModel> list(CarModel carModel) {
-		JqgridResult<CarModel> list = carModelService.list(carModel);
+		JqgridResult<CarModel> list;
+		try {
+			list = carModelService.list(carModel);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		return list;
 	}
 	
 	@RequestMapping("/insert")
 	public @ResponseBody AutoResult insert(CarModel carModel) {
-		AutoResult result = carModelService.insert(carModel);
-		return result;
+		try {
+			carModelService.insert(carModel);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AutoResult.error("新增失败");
+		}
+		return AutoResult.success();
 	}
 	
 	@RequestMapping("/getById")
 	public @ResponseBody CarModel getById(String modelId) {
 		CarModel carModel = new CarModel();
 		carModel.setModelId(modelId);
-		carModel = carModelService.get(carModel);
+		try {
+			carModel = carModelService.get(carModel);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		return carModel;
 	}
 	
 	@RequestMapping("/update")
 	public @ResponseBody AutoResult update(CarModel carModel) {
-		AutoResult result = carModelService.update(carModel);
-		return result;
+		try {
+			carModelService.update(carModel);
+		} catch (Exception e) {
+			e.printStackTrace();
+			AutoResult.error("修改失败");
+		}
+		return AutoResult.success();
 	}
 	
 }

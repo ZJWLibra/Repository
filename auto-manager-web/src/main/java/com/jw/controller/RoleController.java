@@ -19,10 +19,8 @@ import com.jw.shiro.realm.CustomRealm;
 @Controller
 @RequestMapping("/role")
 public class RoleController {
-	
 	@Resource
 	private RoleService roleService;
-	
 	@Resource
 	private CustomRealm customRealm;
 	
@@ -36,33 +34,51 @@ public class RoleController {
 	@RequestMapping("/list")
 	@RequiresPermissions("role:list")
 	public @ResponseBody JqgridResult<Role> list(Role role) {
-		JqgridResult<Role> result = roleService.list(role);
-		
+		JqgridResult<Role> result;
+		try {
+			result = roleService.list(role);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		return result;
 	}
 	
 	@RequestMapping("/insert")
 	@RequiresPermissions("role:insert")
 	public @ResponseBody AutoResult insert(Role role) {
-		AutoResult autoResult = roleService.insert(role);
-		
-		return autoResult;
+		try {
+			roleService.insert(role);
+		} catch (Exception e) {
+			e.printStackTrace();
+			AutoResult.error("新增失败");
+		}
+		return AutoResult.success();
 	}
 	
 	@RequestMapping("/getById")
 	@RequiresPermissions("role:update")
 	public @ResponseBody Role getById(Role role) {
-		Role role2 = roleService.get(role);
-		
+		Role role2;
+		try {
+			role2 = roleService.get(role);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		return role2;
 	}
 	
 	@RequestMapping("/update")
 	@RequiresPermissions("role:update")
 	public @ResponseBody AutoResult update(Role role) {
-		AutoResult autoResult = roleService.update(role);
-		
-		return autoResult;
+		try {
+			roleService.update(role);
+		} catch (Exception e) {
+			e.printStackTrace();
+			AutoResult.error("修改");
+		}
+		return AutoResult.success();
 	}
 	
 	/**
@@ -73,8 +89,13 @@ public class RoleController {
 	@RequestMapping("/getPermissionsByRoleId")
 	@RequiresPermissions("role:permission")
 	public @ResponseBody List<AutoTree> getPermissionsByRoleId(String roleId) {
-		List<AutoTree> list = roleService.getPermissionsByRoleId(roleId);
-		
+		List<AutoTree> list;
+		try {
+			list = roleService.getPermissionsByRoleId(roleId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		return list;
 	}
 	
@@ -87,10 +108,14 @@ public class RoleController {
 	@RequestMapping("/insertPermission")
 	@RequiresPermissions("role:permission")
 	public @ResponseBody AutoResult insertPermission(String[] ids, String roleId) {
-		AutoResult autoResult = roleService.insertPermission(ids, roleId);
-		
+		try {
+			roleService.insertPermission(ids, roleId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AutoResult.error("授权失败");
+		}
 		customRealm.clearCached();
-		
-		return autoResult;
+		return AutoResult.success();
 	}
+	
 }

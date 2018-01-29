@@ -68,6 +68,9 @@ String path = request.getContextPath();
 							<shiro:hasPermission name="user:delete">
 							<button data-toggle="button" class="btn btn-primary user-remove" type="button">删除</button>
 							</shiro:hasPermission>
+							<shiro:hasPermission name="user:role">
+							<button data-toggle="button" class="btn btn-primary user-role" type="button">添加角色</button>
+							</shiro:hasPermission>
 						</div>
                         <div class="jqGrid_wrapper">
                             <table id="grid_table"></table>
@@ -103,6 +106,64 @@ String path = request.getContextPath();
                                 <div class="form-group">
                                     <label class="must-label">确认密码(必填):</label>
                                     <input type="password" placeholder="请确认密码" class="form-control" id="userPwd2" name="userPwd2" />
+                                </div>
+                                <div class="form-group">
+                                    <label>昵称:</label>
+                                    <input type="text" placeholder="请输入昵称" class="form-control" id="userNickname" name="userNickname" />
+                                </div>
+                                <div class="form-group">
+                                    <label>身份证号码:</label>
+                                    <input type="text" placeholder="请输入身份证号码" class="form-control" id="userIdentity" name="userIdentity" />
+                                </div>
+                                <div class="form-group">
+                                    <label>真实姓名:</label>
+                                    <input type="text" placeholder="请输入真实姓名" class="form-control" id="userName" name="userName" />
+                                </div>
+                                <div class="form-group">
+                                    <label>性别:</label>
+                                    <label class="form-inline" style="margin-left:10px">
+										男&nbsp;&nbsp;<input type="radio" name="userGender" value="G" checked />
+									</label>
+									<label class="form-inline" style="margin-left:10px">
+										女&nbsp;&nbsp;<input type="radio" name="userGender" value="M" />
+									</label>
+                                </div>
+                                <div class="form-group">
+                                    <label>生日:</label>
+                                    <div>
+                                        <input readonly type="text" class="form-control layer-date" id="strUserBirthday" name="strUserBirthday" />
+                                        <label class="laydate-icon inline demoicon" onclick="laydate({elem: '#strUserBirthday'});"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>地址:</label>
+                                    <input type="text" placeholder="请输入地址" class="form-control" id="userAddress" name="userAddress" />
+                                </div>
+                                <div class="form-group">
+                                    <label>QQ:</label>
+                                    <input type="text" placeholder="请输入QQ" class="form-control" id="qqOpenId" name="qqOpenId" />
+                                </div>
+                                <div class="form-group">
+                                    <label>微信:</label>
+                                    <input type="text" placeholder="请输入微信" class="form-control" id="wechatOpenId" name="wechatOpenId" />
+                                </div>
+                                <div class="form-group">
+                                    <label>微博:</label>
+                                    <input type="text" placeholder="请输入微博" class="form-control" id="weiboOpenId" name="weiboOpenId" />
+                                </div>
+                                <div class="form-group">
+                                    <label>描述:</label>
+                                    <input type="text" placeholder="请输入描述" class="form-control" id="userDes" name="userDes" />
+                                </div>
+                                <div class="form-group">
+                                    <label>所属公司:</label>
+                                    <select class="form-control m-b" id="companyId" name="companyId">
+		                        		<option value="">请选择</option>
+									</select>
+                                </div>
+                                <div class="form-group">
+                                    <label>基本工资:</label>
+                                    <input type="text" placeholder="请输入基本工资" class="form-control" id="userSalary" name="userSalary" />
                                 </div>
                                 <div class="form-group">
                                     <label>状态:</label>
@@ -191,6 +252,12 @@ String path = request.getContextPath();
                                 <div class="form-group">
                                     <label>描述:</label>
                                     <input type="text" placeholder="请输入描述" class="form-control" id="editUserDes" name="userDes" />
+                                </div>
+                                <div class="form-group">
+                                    <label>所属公司:</label>
+                                    <select class="form-control m-b" id="editCompanyId" name="companyId">
+		                        		<option value="">请选择</option>
+									</select>
                                 </div>
                                 <div class="form-group">
                                     <label>基本工资:</label>

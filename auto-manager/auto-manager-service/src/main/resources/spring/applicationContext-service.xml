@@ -18,9 +18,9 @@
 		http://www.springframework.org/schema/util/spring-util-4.3.xsd
 		http://code.alibabatech.com/schema/dubbo
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-
-	<context:component-scan base-package="com.jw.service" />
-
+		
+	<context:component-scan base-package="com.jw.service.impl" />
+	
 	<!-- 使用dubbo发布服务 -->
 	<!-- 提供方应用信息，用于计算依赖关系 -->
 	<dubbo:application name="auto-manager" />

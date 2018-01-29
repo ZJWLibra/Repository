@@ -7,6 +7,6 @@ import com.jw.bean.CarModel;
 
 public interface CarModelService extends BaseService<CarModel> {
 
-	List<CarBrand> listCarBrand();
+	List<CarBrand> listCarBrand() throws Exception;
 	
 }

@@ -25,10 +25,8 @@ import com.jw.util.MD5Util;
 public class UserController {
 	@Resource
 	private UserService userService;
-	
 	@Resource
 	private RoleService roleService;
-	
 	@Resource
 	private CustomRealm customRealm;
 	
@@ -42,8 +40,13 @@ public class UserController {
 	@RequestMapping("/list")
 	@RequiresPermissions("user:list")
 	public @ResponseBody JqgridResult<User> list(User user) {
-		JqgridResult<User> result = userService.list(user);
-		
+		JqgridResult<User> result;
+		try {
+			result = userService.list(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		return result;
 	}
 	
@@ -59,19 +62,23 @@ public class UserController {
 		
 		if (strUserBirthday != null && !strUserBirthday.equals("")) {
 			userBirthday = DateUtil.stringToDate(strUserBirthday, "yyyy-MM-dd");
+			user.setUserBirthday(userBirthday);
 		}
 		
-		// 设置用户密码
+		// 设置密码
 		user.setUserPwd(MD5Util.getMD5(user.getUserPwd(), user.getUserPhone()));
-		
-		user.setUserBirthday(userBirthday);
 		user.setUserSalt(user.getUserPhone());
 		user.setUserCreatedTime(new Date());
+		// 设置默认头像
 		user.setUserIcon("img/default.png");
 		
-		AutoResult autoResult = userService.insert(user);
-		
-		return autoResult;
+		try {
+			userService.insert(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AutoResult.error("新增失败");
+		}
+		return AutoResult.success();
 	}
 	
 	/**
@@ -82,8 +89,13 @@ public class UserController {
 	@RequestMapping("/delete")
 	@RequiresPermissions("user:delete")
 	public @ResponseBody AutoResult delete(String[] ids) {
-		
-		return userService.delete(ids);
+		try {
+			userService.delete(ids);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AutoResult.error("删除失败");
+		}
+		return AutoResult.success();
 	}
 	
 	/**
@@ -94,13 +106,17 @@ public class UserController {
 	 */
 	@RequestMapping("/getByEmail")
 	public @ResponseBody Boolean getByEmail(User user) {
-		User user2 = userService.get(user);
-		
+		User user2;
+		try {
+			user2 = userService.get(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		// 邮箱不存在
 		if (user2 == null) {
 			return false;
 		}
-		
 		// 邮箱存在
 		return true;
 	}
@@ -112,8 +128,13 @@ public class UserController {
 	@RequestMapping("/getById")
 	@RequiresPermissions("user:update")
 	public @ResponseBody User getById(User user) {
-		User user2 = userService.get(user);
-		
+		User user2;
+		try {
+			user2 = userService.get(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		return user2;
 	}
 	
@@ -142,9 +163,13 @@ public class UserController {
 		user.setUserCreatedTime(userCreatedTime);
 		user.setUserLoginedTime(userLoginedTime);
 		
-		AutoResult autoResult = userService.update(user);
-		
-		return autoResult;
+		try {
+			userService.update(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			AutoResult.error("修改失败");
+		}
+		return AutoResult.success();
 	}
 	
 	/**
@@ -155,8 +180,13 @@ public class UserController {
 	@RequestMapping("/getRolesById")
 	@RequiresPermissions("user:role")
 	public @ResponseBody List<AutoTree> getRolesById(String userId) {
-		List<AutoTree> list = userService.getRolesById(userId);
-		
+		List<AutoTree> list;
+		try {
+			list = userService.getRolesById(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		return list;
 	}
 	
@@ -169,10 +199,14 @@ public class UserController {
 	@RequestMapping("/insertRole")
 	@RequiresPermissions("user:role")
 	public @ResponseBody AutoResult insertRole(String[] ids, String userId) {
-		AutoResult autoResult = userService.insertRole(ids, userId);
-		
+		try {
+			userService.insertRole(ids, userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			AutoResult.error("操作失败");
+		}
 		customRealm.clearCached();
-		
-		return autoResult;
+		return AutoResult.success();
 	}
+	
 }

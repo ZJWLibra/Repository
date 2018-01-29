@@ -14,7 +14,6 @@ import com.jw.service.CarPlateService;
 @Controller
 @RequestMapping("/carPlate")
 public class CarPlateController {
-
 	@Resource
 	private CarPlateService carPlateService;
 	
@@ -25,28 +24,49 @@ public class CarPlateController {
 	
 	@RequestMapping("/list")
 	public @ResponseBody JqgridResult<CarPlate> list(CarPlate carPlate) {
-		JqgridResult<CarPlate> result = carPlateService.list(carPlate);
+		JqgridResult<CarPlate> result;
+		try {
+			result = carPlateService.list(carPlate);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		return result;
 	}
 	
 	@RequestMapping("/insert")
 	public @ResponseBody AutoResult insert(CarPlate carPlate) {
-		AutoResult result = carPlateService.insert(carPlate);
-		return result;
+		try {
+			carPlateService.insert(carPlate);
+		} catch (Exception e) {
+			e.printStackTrace();
+			AutoResult.error("新增失败");
+		}
+		return AutoResult.success();
 	}
 	
 	@RequestMapping("/getById")
 	public @ResponseBody CarPlate getById(String plateId) {
 		CarPlate carPlate = new CarPlate();
 		carPlate.setPlateId(plateId);
-		carPlate = carPlateService.get(carPlate);
+		try {
+			carPlate = carPlateService.get(carPlate);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		return carPlate;
 	}
 	
 	@RequestMapping("/update")
 	public @ResponseBody AutoResult update(CarPlate carPlate) {
-		AutoResult result = carPlateService.update(carPlate);
-		return result;
+		try {
+			carPlateService.update(carPlate);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return AutoResult.error("修改失败");
+		}
+		return AutoResult.success();
 	}
 
 }
