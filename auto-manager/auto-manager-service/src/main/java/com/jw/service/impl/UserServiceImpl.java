@@ -42,21 +42,22 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void insert(User t) throws Exception {
 		userMapper.insert(t);
-		// 获取用户身份信息
-		UserExt userExt = ShiroUtil.getUser();
-		// 如果操作用户为超级管理员
-		if (userExt.getUserId().equals(SUPER_ADMIN_USERID)) {
-			// 查询普通管理员信息
-			Role role = new Role();
-			role.setRoleName("systemOrdinaryAdmin");
-			role = roleMapper.get(role);
-			// 将要添加的管理员设置角色为普通管理员
-			UserRole userRole = new UserRole();
-			userRole.setUserId(t.getUserId());
-			userRole.setRoleId(role.getRoleId());
-			userRole.setUrCreatedTime(new Date());
-			userRoleMapper.insert(userRole);
-		}
+	}
+	
+	@Override
+	public void insertSuperAdmin(User user) throws Exception {
+		user.setUserNickname("管理员");
+		userMapper.insert(user);
+		// 查询普通管理员信息
+		Role role = new Role();
+		role.setRoleName("systemOrdinaryAdmin");
+		role = roleMapper.get(role);
+		// 将要添加的管理员设置角色为普通管理员
+		UserRole userRole = new UserRole();
+		userRole.setUserId(user.getUserId());
+		userRole.setRoleId(role.getRoleId());
+		userRole.setUrCreatedTime(new Date());
+		userRoleMapper.insert(userRole);
 	}
 	
 	@Override

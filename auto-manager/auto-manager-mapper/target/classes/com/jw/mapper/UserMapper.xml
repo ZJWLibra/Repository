@@ -62,6 +62,9 @@
 	</select>
 	
 	<insert id="insert" parameterType="User">
+		<selectKey keyProperty="userId" order="BEFORE" resultType="java.lang.String">
+			select uuid()
+		</selectKey>
 		insert into t_user (
 			userId,
 			userEmail,
@@ -87,7 +90,7 @@
 		)
 		values
 			(
-				UUID(),
+				#{userId},
 				#{userEmail}, #{userPhone}, #{userPwd}, #{userSalt},
 				#{userNickname}, #{userIdentity}, #{userName}, #{userGender},
 				#{userBirthday}, #{userAddress}, #{qqOpenId}, #{weiboOpenId},

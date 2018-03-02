@@ -8,6 +8,8 @@ import com.jw.common.AutoTree;
 
 public interface UserService extends BaseService<User> {
 	
+	void insertSuperAdmin(User user) throws Exception;
+	
 	User getUserByName(String username) throws Exception;
 	
 	User getByEmail(User user) throws Exception;

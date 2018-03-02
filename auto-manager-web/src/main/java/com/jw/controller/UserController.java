@@ -6,11 +6,13 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jw.bean.User;
+import com.jw.bean.ext.UserExt;
 import com.jw.common.AutoResult;
 import com.jw.common.AutoTree;
 import com.jw.common.JqgridResult;
@@ -19,6 +21,7 @@ import com.jw.service.UserService;
 import com.jw.shiro.realm.CustomRealm;
 import com.jw.util.DateUtil;
 import com.jw.util.MD5Util;
+import com.jw.util.ShiroUtil;
 
 @Controller
 @RequestMapping("/user")
@@ -29,6 +32,9 @@ public class UserController {
 	private RoleService roleService;
 	@Resource
 	private CustomRealm customRealm;
+	
+	@Value("${SUPER_ADMIN_USERID}")
+	private String SUPER_ADMIN_USERID;
 	
 	@RequestMapping("/toIndex")
 	@RequiresPermissions("user:list")
@@ -72,8 +78,15 @@ public class UserController {
 		// 设置默认头像
 		user.setUserIcon("img/default.png");
 		
+		// 获取当前登录用户
+		UserExt userExt = ShiroUtil.getUser();
 		try {
-			userService.insert(user);
+			// 如果当前登录用户为超级管理员
+			if (userExt.getUserId().equals(SUPER_ADMIN_USERID)) {
+				userService.insertSuperAdmin(user);
+			} else {
+				userService.insert(user);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return AutoResult.error("新增失败");

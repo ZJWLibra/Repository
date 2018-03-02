@@ -17,7 +17,7 @@
         http://code.alibabatech.com/schema/dubbo
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 		
-	<context:property-placeholder location="classpath:config/oss.properties" />
+	<context:property-placeholder location="classpath:config/*.properties" />
 		
 	<import resource="classpath:spring/applicationContext-shiro.xml" />
 
@@ -51,7 +51,7 @@
 	</bean>
 	
 	<!-- 全局异常处理器 -->
-	<!-- <bean class="com.jw.exception.CustomExceptionResolver"></bean> -->
+	<bean class="com.jw.exception.CustomExceptionResolver"></bean>
 
 	<!-- 引用dubbo服务 -->
 	<dubbo:application name="auto-manager-web" />
