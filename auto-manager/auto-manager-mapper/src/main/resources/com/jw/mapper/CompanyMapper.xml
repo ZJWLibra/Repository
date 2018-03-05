@@ -38,6 +38,9 @@
 	</select>
 	
 	<insert id="insert" parameterType="Company">
+		<selectKey keyProperty="companyId" order="BEFORE" resultType="java.lang.String">
+			select uuid()
+		</selectKey>
 		insert into t_company (
 			companyId,
 			companyName,
@@ -57,7 +60,7 @@
 			createTime
 		)
 		values (
-			UUID(),
+			#{companyId},
 			#{companyName},
 			#{companyAddress},
 			#{companyTel},

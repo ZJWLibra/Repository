@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +13,6 @@ import com.jw.bean.Permission;
 import com.jw.bean.Role;
 import com.jw.bean.User;
 import com.jw.bean.UserRole;
-import com.jw.bean.ext.UserExt;
 import com.jw.common.AutoTree;
 import com.jw.common.JqgridResult;
 import com.jw.mapper.PermissionMapper;
@@ -22,7 +20,6 @@ import com.jw.mapper.RoleMapper;
 import com.jw.mapper.UserMapper;
 import com.jw.mapper.UserRoleMapper;
 import com.jw.service.UserService;
-import com.jw.util.ShiroUtil;
 
 @Service
 @Transactional
@@ -35,9 +32,6 @@ public class UserServiceImpl implements UserService {
 	private UserRoleMapper userRoleMapper;
 	@Resource
 	private PermissionMapper permissionMapper;
-	
-	@Value("${SUPER_ADMIN_USERID}")
-	private String SUPER_ADMIN_USERID;
 
 	@Override
 	public void insert(User t) throws Exception {

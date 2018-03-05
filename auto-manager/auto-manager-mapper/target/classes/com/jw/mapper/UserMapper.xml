@@ -20,6 +20,13 @@
 			<if test="userStatus != null and userStatus != ''">
 				and userStatus = #{userStatus}
 			</if>
+			<if test="userNickname == '超级管理员'">
+				and userId in (
+					select userId from t_user_role where roleId in (
+						select roleId from t_role where roleName in ('systemSuperAdmin', 'systemOrdinaryAdmin')
+					)
+				)
+			</if>
 		</where>
 	</sql>
 	<sql id="query_get">
@@ -37,6 +44,13 @@
 	</sql>
 	
 	<select id="list" parameterType="User" resultType="User">
+		select * from t_user
+		<include refid="query_list"></include>
+		<include refid="sort"></include>
+		<include refid="page"></include>
+	</select>
+	
+	<select id="listAdmin" parameterType="User" resultType="User">
 		select * from t_user
 		<include refid="query_list"></include>
 		<include refid="sort"></include>

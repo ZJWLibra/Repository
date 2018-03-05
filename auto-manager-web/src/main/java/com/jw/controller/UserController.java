@@ -48,6 +48,10 @@ public class UserController {
 	public @ResponseBody JqgridResult<User> list(User user) {
 		JqgridResult<User> result;
 		try {
+			// 如果登录用户为超级管理员
+			if (ShiroUtil.getUser().getUserId().equals(SUPER_ADMIN_USERID)) {
+				user.setUserNickname("超级管理员");
+			}
 			result = userService.list(user);
 		} catch (Exception e) {
 			e.printStackTrace();
